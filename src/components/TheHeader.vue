@@ -2,7 +2,8 @@
   <header>
     <HeaderButton @open-menu="openMenu"/>
     <HeaderSearch/>
-    <HeaderMenu :class="{active: isActive}"/>
+    <HeaderMenu :class="{nav_active: isActiveMenu}" @close-menu="closeMenu"/>
+    <HeaderOverlay :class="{overlay_active: isActiveOverlay}" @close-menu="closeMenu"/>
   </header>
 </template>
 
@@ -10,23 +11,31 @@
 import HeaderButton from '@/components/HeaderButton.vue'
 import HeaderSearch from '@/components/HeaderSearch.vue'
 import HeaderMenu from '@/components/HeaderMenu.vue'
+import HeaderOverlay from '@/components/HeaderOverlay.vue'
 
 export default {
   name: 'TheHeader',
   data() {
     return {
-      isActive: false
-    }
+      isActiveMenu: false,
+      isActiveOverlay: false
+    };
   },
   methods: {
     openMenu() {
-      this.isActive = true
+      this.isActiveMenu = true
+      this.isActiveOverlay = true
+    },
+    closeMenu() {
+      this.isActiveMenu = false
+      this.isActiveOverlay = false
     }
   },
   components: {
     HeaderSearch,
     HeaderButton,
-    HeaderMenu
+    HeaderMenu,
+    HeaderOverlay
   }
 }
 </script>
@@ -34,7 +43,7 @@ export default {
 <style lang="sass" scoped>
 header
   width: 100%
-  padding: 27px
+  padding: 2.8rem
   position: relative
   top: 0
   left: 0

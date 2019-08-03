@@ -28,7 +28,7 @@ html
 
 body
 	font-family: Montserrat, sans-serif
-	font-size: 16px
+	font-size: 1.6rem
 	line-height: 1.6
 	font-weight: 400
 </style>

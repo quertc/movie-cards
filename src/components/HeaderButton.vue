@@ -1,25 +1,26 @@
 <template>
-  <div class="hamburger-menu" @click="$emit('open-menu')">
+  <button class="hamburger-menu" @click.prevent="$emit('open-menu')">
     <span></span>
     <span></span>
     <span></span>
-  </div>
+  </button>
 </template>
 
 <style scoped lang="sass">
 .hamburger-menu
   display: flex
-  flex-direction: column
+  flex-flow: column
   justify-content: center
   align-content: center
-  flex-basis: 30px
+  flex-basis: 3rem
   background: transparent
   border: none
+  outline: none
   cursor: pointer
   span
     width: 100%
-    height: 5px
+    height: 0.5rem
     background: $dark-grey
-    margin: 2.5px 0
+    margin: 0.25rem 0
     border-radius: 10px
 </style>
