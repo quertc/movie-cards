@@ -14,8 +14,6 @@
   align-content: center
   flex-basis: 3rem
   background: transparent
-  border: none
-  outline: none
   cursor: pointer
   span
     width: 100%

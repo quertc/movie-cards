@@ -31,4 +31,18 @@ body
 	font-size: 1.6rem
 	line-height: 1.6
 	font-weight: 400
+
+button
+	outline: none
+	border: none
+	&:focus, &:active, &::-moz-focus-inner
+		outline: none
+		border: none
+		
+a
+	outline: none
+	border: none
+	&:focus, &:active, &::-moz-focus-inner
+		outline: none
+		border: none
 </style>

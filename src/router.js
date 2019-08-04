@@ -10,7 +10,17 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: () => import('./views/Home.vue')
+      redirect: '/discover/Popular'
+    },
+    {
+      path: '/discover/:type',
+      name: 'discover',
+      component: () => import('./views/Discover.vue')
+    },
+    {
+      path: '/genres/:genre',
+      name: 'genres',
+      component: () => import('./views/Genres.vue')
     }
   ]
 })

@@ -39,16 +39,14 @@ export default {
   border: 1px solid $dark-grey
   border-radius: 4px
   &__input
-    border: none
-    outline: none
     padding: 0.5rem
     border-radius: 4px 0 0 4px
     color: $dark-grey
+    border: none
+    outline: none
   &__button
-    border: transparent
     border-left: 1px solid $dark-grey
     border-radius: 0 2px 2px 0
-    outline: none
     cursor: pointer
     background: $dark-grey
     svg
