@@ -5,7 +5,7 @@
       <span></span>
     </button>
     <a href="" class="nav__logo">
-      <img src="../article/tmdb-logo.svg" alt="TMDb logo" title="The Movie Database">
+      <img src="../assets/tmdb-logo.svg" alt="TMDb logo" title="The Movie Database">
     </a>
     <div class="nav__discover-menu">
       <h4 class="nav__discover-menu-caption">Discover</h4>
@@ -47,7 +47,7 @@ export default {
   data() {
     return {
       genresList: []
-    }
+    };
   },
   async created() {
     try {
@@ -135,8 +135,8 @@ export default {
     top: 1rem
     right: 1rem
     background: transparent
-    width: 2.2rem
-    height: 2.2rem
+    width: 2.3rem
+    height: 2.3rem
     outline: none
     border: none
     cursor: pointer

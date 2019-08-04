@@ -1,9 +1,9 @@
 <template>
   <header>
-    <HeaderButton @open-menu="openMenu"/>
+    <HeaderButton @open-menu="switchMenu"/>
     <HeaderSearch/>
-    <HeaderMenu :class="{nav_active: isActiveMenu}" @close-menu="closeMenu"/>
-    <HeaderOverlay :class="{overlay_active: isActiveOverlay}" @close-menu="closeMenu"/>
+    <HeaderMenu :class="{nav_active: isActiveMenu}" @close-menu="switchMenu"/>
+    <HeaderOverlay :class="{overlay_active: isActiveMenu}" @close-menu="switchMenu"/>
   </header>
 </template>
 
@@ -17,18 +17,12 @@ export default {
   name: 'TheHeader',
   data() {
     return {
-      isActiveMenu: false,
-      isActiveOverlay: false
+      isActiveMenu: false
     };
   },
   methods: {
-    openMenu() {
-      this.isActiveMenu = true
-      this.isActiveOverlay = true
-    },
-    closeMenu() {
-      this.isActiveMenu = false
-      this.isActiveOverlay = false
+    switchMenu() {
+      this.isActiveMenu = !this.isActiveMenu;
     }
   },
   components: {
