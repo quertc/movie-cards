@@ -22,8 +22,8 @@ export default {
 
 <style lang="sass" scoped>
 .main
-  margin-top: 1.2rem
-  padding: 3rem 2.8rem
+  margin-top: 0.6rem
+  padding: 2.6rem 2.8rem
   &__caption
     display: flex
     flex-flow: column
@@ -32,7 +32,7 @@ export default {
     font-size: 2.4rem
     color: $dark-grey
     letter-spacing: -0.25px
-    line-height: 1
+    line-height: 1.15
     &-span
       font-weight: 600
       font-size: 1.4rem

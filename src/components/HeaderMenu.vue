@@ -1,10 +1,10 @@
 <template>
   <nav class="nav">
-    <button class="nav__close-button" @click.prevent="$emit('close-menu')">
+    <button class="nav__close-button" @click.prevent="$emit('close-menu')" aria-label="Close">
       <span></span>
       <span></span>
     </button>
-    <router-link :to="{ name: 'discover', params: { type: 'popular' }}" class="nav__logo">
+    <router-link :to="{ name: 'discover', params: { type: 'Popular' }}" class="nav__logo">
       <div @click="$emit('close-menu')">
         <img src="../assets/tmdb-logo.svg" alt="TMDb logo" title="The Movie Database">
       </div>
@@ -38,7 +38,7 @@
     </div>
     <div class="nav__copyright">
       Copyright ©
-      <a href="https://github.com/quertc" target="_blank" title="GitHub profile" class="nav__copyright-link">Shkatov</a>
+      <a href="https://github.com/quertc" target="_blank" rel="noopener" title="GitHub profile" class="nav__copyright-link">Shkatov</a>
     </div>
   </nav>
 </template>
@@ -150,5 +150,4 @@ export default {
       text-decoration: none
       margin-left: 4px
       font-weight: 600
-
 </style>

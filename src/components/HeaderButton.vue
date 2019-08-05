@@ -1,9 +1,9 @@
 <template>
-  <button class="hamburger-menu" @click.prevent="$emit('open-menu')">
+  <div class="hamburger-menu" @click.prevent="$emit('open-menu')">
     <span></span>
     <span></span>
     <span></span>
-  </button>
+  </div>
 </template>
 
 <style scoped lang="sass">
