@@ -1,7 +1,7 @@
 <template>
   <main class="main">
     <h1 class="main__caption">
-      {{  $route.params.type | toUpperCase }}
+      {{  $route.params.category | toUpperCase }}
       <span class="main__caption-span">movies</span>
     </h1>
   </main>
@@ -14,7 +14,7 @@ export default {
     toUpperCase(value) {
       if (!value) return '';
       value = value.toString();
-      return value.toUpperCase();
+      return value.replace(/_/g, ' ').toUpperCase()
     }
   }
 }

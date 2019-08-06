@@ -10,10 +10,10 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      redirect: '/discover/Popular'
+      redirect: '/discover/popular'
     },
     {
-      path: '/discover/:type',
+      path: '/discover/:category',
       name: 'discover',
       component: () => import('./views/Discover.vue')
     },
@@ -21,6 +21,14 @@ export default new Router({
       path: '/genres/:genre',
       name: 'genres',
       component: () => import('./views/Genres.vue')
+    },
+    {
+      path: '*',
+      redirect: '/404'
+    },
+    {
+      path: '/404',
+      component: () => import('./views/404.vue')
     }
   ]
 })
