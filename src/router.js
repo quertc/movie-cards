@@ -15,12 +15,14 @@ export default new Router({
     {
       path: '/discover/:category',
       name: 'discover',
-      component: () => import('./views/Discover.vue')
+      component: () => import('./views/Discover.vue'),
+      props: true
     },
     {
       path: '/genres/:genre',
       name: 'genres',
-      component: () => import('./views/Genres.vue')
+      component: () => import('./views/Genres.vue'),
+      props: true
     },
     {
       path: '*',
@@ -28,7 +30,7 @@ export default new Router({
     },
     {
       path: '/404',
-      component: () => import('./views/404.vue')
+      component: () => import('./views/Error.vue')
     }
   ]
 })

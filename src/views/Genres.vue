@@ -1,7 +1,7 @@
 <template>
   <main class="main">
     <h1 class="main__caption">
-      {{  $route.params.genre | toUpperCase }}
+      {{  genre | toUpperCase }}
       <span class="main__caption-span">movies</span>
     </h1>
   </main>
@@ -10,6 +10,9 @@
 <script>
 export default {
   name: 'genres',
+  props: {
+    genre: String
+  },
   filters: {
     toUpperCase(value) {
       if (!value) return '';

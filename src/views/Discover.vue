@@ -1,7 +1,7 @@
 <template>
   <main class="main">
     <h1 class="main__caption">
-      {{  $route.params.category | toUpperCase }}
+      {{ category | toUpperCase }}
       <span class="main__caption-span">movies</span>
     </h1>
   </main>
@@ -10,12 +10,31 @@
 <script>
 export default {
   name: 'discover',
+  props: {
+    category: String
+  },
   filters: {
     toUpperCase(value) {
       if (!value) return '';
       value = value.toString();
-      return value.replace(/_/g, ' ').toUpperCase()
+      return value.replace(/_/g, ' ').toUpperCase();
     }
+  },
+  beforeRouteUpdate(to, from, next) {
+    const availableCategories = ['popular', 'top_rated', 'upcoming'];
+    if (!availableCategories.includes(to.params.category)) {
+      next('/404');
+    } else {
+      next();
+    };
+  },
+  beforeRouteEnter(to, from, next) {
+    const availableCategories = ['popular', 'top_rated', 'upcoming'];
+    if (!availableCategories.includes(to.params.category)) {
+      next('/404');
+    } else {
+      next();
+    };
   }
 }
 </script>
