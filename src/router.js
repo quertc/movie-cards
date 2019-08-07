@@ -30,7 +30,7 @@ export default new Router({
     },
     {
       path: '/404',
-      component: () => import('./views/Error.vue')
+      component: () => import('./views/NotFound.vue')
     }
   ]
 })

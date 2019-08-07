@@ -14,7 +14,6 @@ import HeaderMenu from '@/components/HeaderMenu.vue'
 import HeaderOverlay from '@/components/HeaderOverlay.vue'
 
 export default {
-  name: 'TheHeader',
   data() {
     return {
       isActiveMenu: false

@@ -2,12 +2,6 @@
   <div class="overlay" @click="$emit('close-menu')"></div>
 </template>
 
-<script>
-export default {
-  name: 'HeaderOverlay'
-}
-</script>
-
 <style lang="sass" scoped>
 .overlay
   visibility: hidden

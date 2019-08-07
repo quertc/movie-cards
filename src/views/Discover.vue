@@ -9,7 +9,6 @@
 
 <script>
 export default {
-  name: 'discover',
   props: {
     category: String
   },

@@ -11,7 +11,6 @@
 
 <script>
 export default {
-  name: 'HeaderSearch',
   data() {
     return {
       searchQuery: ''

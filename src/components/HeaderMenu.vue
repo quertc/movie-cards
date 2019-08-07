@@ -45,7 +45,6 @@
 
 <script>
 export default {
-  name: 'HeaderMenu',
   data() {
     return {
       genresList: []
