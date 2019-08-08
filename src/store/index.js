@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import HeaderMenu from './modules/HeaderMenu'
+import genres from './modules/genres'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   modules: {
-    HeaderMenu
+    genres
   }
 })

@@ -16,8 +16,34 @@ export default {
     toUpperCase(value) {
       if (!value) return '';
       value = value.toString();
-      return value.toUpperCase();
+      return value.replace(/_/g, ' ').toUpperCase();
     }
+  },
+  async beforeRouteUpdate(to, from, next) {
+    let genres = this.$store.getters.allGenresName;
+    if (!genres.length) {
+      await this.$store.dispatch('fetchGenres');
+      genres = await this.$store.getters.allGenresName;
+    };
+    if (!genres.includes(to.params.genre)) {
+      next('/404');
+    } else {
+      next()
+    };
+  },
+  beforeRouteEnter(to, from, next) {
+    next(async vm => {
+      let genres = vm.$store.getters.allGenresName;
+      if (!genres.length) {
+        await vm.$store.dispatch('fetchGenres');
+        genres = await vm.$store.getters.allGenresName;
+      };
+      if (!genres.includes(to.params.genre)) {
+        next('/404');
+      } else {
+        next()
+      };
+    });
   }
 }
 </script>

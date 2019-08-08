@@ -20,16 +20,14 @@ export default {
     }
   },
   beforeRouteUpdate(to, from, next) {
-    const availableCategories = ['popular', 'top_rated', 'upcoming'];
-    if (!availableCategories.includes(to.params.category)) {
+    if (!['popular', 'top_rated', 'upcoming'].includes(to.params.category)) {
       next('/404');
     } else {
       next();
     };
   },
   beforeRouteEnter(to, from, next) {
-    const availableCategories = ['popular', 'top_rated', 'upcoming'];
-    if (!availableCategories.includes(to.params.category)) {
+    if (!['popular', 'top_rated', 'upcoming'].includes(to.params.category)) {
       next('/404');
     } else {
       next();
