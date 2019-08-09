@@ -16,5 +16,5 @@
   background: $dark-grey
   &.overlay_active
     visibility: visible
-    opacity: 0.2
+    opacity: 0.25
 </style>

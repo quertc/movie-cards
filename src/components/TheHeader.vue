@@ -36,7 +36,7 @@ export default {
 <style lang="sass" scoped>
 header
   width: 100%
-  padding: 2.8rem
+  padding: 3rem
   position: relative
   top: 0
   left: 0

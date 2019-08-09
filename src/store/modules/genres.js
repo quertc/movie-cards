@@ -1,29 +1,39 @@
 export default {
   actions: {
-    async fetchGenres({ commit }) {
+    async fetchGenresList({ commit }) {
       try {
         const response = await fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${process.env.VUE_APP_SECRET}&language=en-US`);
         const data = await response.json();
-        commit('updateGenres', data.genres);
+        commit('updateGenresList', data.genres);
       } catch(e) {
         console.error(e);
       };
+    },
+    async fetchGenreMovies({ commit }, genreID) {
+      try {
+        const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.VUE_APP_SECRET}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${genreID}`);
+        const data = await response.json();
+        commit('updateGenreMovies', data.results)
+      } catch(e) {
+        console.error(e);
+      }
     }
   },
   mutations: {
-    updateGenres(state, genres) {
+    updateGenresList(state, genres) {
       state.genresList = genres;
+    },
+    updateGenreMovies(state, movies) {
+      state.genreMovies = movies
     }
   },
   state: {
-    genresList: []
+    genresList: [],
+    genreMovies: []
   },
   getters: {
-    allGenres(state) {
-      return state.genresList
-    },
-    allGenresName(state) {
-      return state.genresList.map(obj => obj.name.replace(/ /g, '_').toLowerCase())
-    }
+    allGenresList: state => state.genresList,
+    allGenresName: state => state.genresList.map(obj => obj.name.replace(/ /g, '_').toLowerCase()),
+    allGenreMovies: state => state.genreMovies
   }
 }
