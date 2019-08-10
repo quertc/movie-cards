@@ -22,7 +22,7 @@ export default {
         this.$refs.input.focus();
         return false;
       } else {
-        this.$emit('search-movies', this.searchQuery);
+        this.$router.push({name: 'search', params: { query: this.searchQuery }});
         this.searchQuery = '';
       };
     }

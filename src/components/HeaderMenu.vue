@@ -5,7 +5,7 @@
       <span></span>
     </button>
     <router-link :to="{ name: 'discover', params: { category: 'popular' }}" class="nav__logo" @click.native="$emit('close-menu')">
-      <img src="../assets/tmdb-logo.svg" alt="TMDb logo" title="The Movie Database">
+      <img src="@/assets/tmdb-logo.svg" alt="TMDb logo" title="The Movie Database">
     </router-link>
     <div class="nav__discover-menu">
       <h4 class="nav__discover-menu-caption">Discover</h4>

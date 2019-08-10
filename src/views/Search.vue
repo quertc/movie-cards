@@ -1,11 +1,11 @@
 <template>
   <main class="main">
     <h1 class="main__caption">
-      {{ category | toUpperCase }}
-      <span class="main__caption-span">movies</span>
+      {{ query | toUpperCase }}
+      <span class="main__caption-span">search results</span>
     </h1>
     <div class="main__container">
-      <MovieItem v-for="movie in allDiscoverMovies" :key="movie.id" :movie="movie"/>
+      <MovieItem v-for="movie in allSearchMovies" :key="movie.id" :movie="movie"/>
     </div>
   </main>
 </template>
@@ -16,13 +16,18 @@ import { mapGetters, mapActions } from 'vuex'
 
 export default {
   props: {
-    category: {
+    query: {
       type: String,
       required: true
     }
   },
-  computed: mapGetters(['allDiscoverMovies', 'allDiscoverCategories']),
-  methods: mapActions(['fetchDiscoverMovies']),
+  data() {
+    return {
+      searchMovies: []
+    }
+  },
+  computed: mapGetters(['allSearchMovies']),
+  methods: mapActions(['getSearchMovies']),
   components: {
     MovieItem
   },
@@ -34,21 +39,12 @@ export default {
     }
   },
   beforeRouteUpdate(to, from, next) {
-    if (!this.allDiscoverCategories.includes(to.params.category)) {
-      next('/404');
-    } else {
-      this.fetchDiscoverMovies(to.params.category);
-      next();
-    };
+    this.getSearchMovies(to.params.query);
+    next();
   },
   beforeRouteEnter(to, from, next) {
     next(vm => {
-      if (!vm.allDiscoverCategories.includes(to.params.category)) {
-        next('/404');
-      } else {
-        vm.fetchDiscoverMovies(to.params.category);
-        next();
-      };
+      vm.getSearchMovies(to.params.query);
     });
   }
 }

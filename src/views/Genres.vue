@@ -1,7 +1,7 @@
 <template>
   <main class="main">
     <h1 class="main__caption">
-      {{  genre | toUpperCase }}
+      {{ genre | toUpperCase }}
       <span class="main__caption-span">movies</span>
     </h1>
     <div class="main__container">
@@ -16,7 +16,10 @@ import { mapGetters, mapActions } from 'vuex'
 
 export default {
   props: {
-    genre: String
+    genre: {
+      type: String,
+      required: true
+    }
   },
   computed: mapGetters(['allGenresList', 'allGenresName', 'allGenreMovies']),
   methods: mapActions(['fetchGenresList', 'fetchGenreMovies']),
@@ -40,7 +43,7 @@ export default {
       next('/404');
     } else {
       const genreID = this.allGenresList.find(obj => obj.name.toLowerCase() == to.params.genre.replace(/_/g, ' ').toLowerCase()).id;
-      this.fetchGenreMovies(genreID)
+      this.fetchGenreMovies(genreID);
       next();
     };
   },
@@ -55,7 +58,7 @@ export default {
         next('/404');
       } else {
         const genreID = vm.allGenresList.find(obj => obj.name.toLowerCase() == to.params.genre.replace(/_/g, ' ').toLowerCase()).id;
-        vm.fetchGenreMovies(genreID)
+        vm.fetchGenreMovies(genreID);
         next();
       };
     });
@@ -79,15 +82,15 @@ export default {
     margin-bottom: 3.6rem
     &-span
       font-weight: 600
-      font-size: 1.4rem
+      font-size: 1.3rem
       color: lighten($dark-grey, 6%)
       text-transform: uppercase
   &__container
     padding: 0.8rem 4rem
     display: grid
-    grid-template-columns: repeat(auto-fit, minmax(10rem, 22.5rem))
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 22rem))
     justify-content: space-evenly
     align-content: space-between
     -webkit-box-align: start
-    gap: 4rem 2.6rem
+    gap: 4rem 2.7rem
 </style>

@@ -9,7 +9,6 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
       redirect: '/discover/popular'
     },
     {
@@ -22,6 +21,12 @@ export default new Router({
       path: '/genres/:genre',
       name: 'genres',
       component: () => import('./views/Genres.vue'),
+      props: true
+    },
+    {
+      path: '/search/:query',
+      name: 'search',
+      component: () => import('./views/Search.vue'),
       props: true
     },
     {
