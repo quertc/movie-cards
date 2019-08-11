@@ -1,8 +1,8 @@
 <template>
   <nav class="nav">
-    <button class="nav__close-button" @click.prevent="$emit('close-menu')" aria-label="Close">
-      <span></span>
-      <span></span>
+    <button class="nav__close-button" aria-label="Close" @click.prevent="$emit('close-menu')">
+      <span class="nav__close-button-line"></span>
+      <span class="nav__close-button-line"></span>
     </button>
     <router-link :to="{ name: 'discover', params: { category: 'popular' }}" class="nav__logo" @click.native="$emit('close-menu')">
       <img src="@/assets/tmdb-logo.svg" alt="TMDb logo" title="The Movie Database">
@@ -63,7 +63,7 @@ export default {
   height: 100%
   width: 29rem
   display: flex
-  flex-flow: column
+  flex-direction: column
   background: $dark-grey
   overflow-y: auto
   transition: left 0.6s ease-in-out
@@ -81,7 +81,7 @@ export default {
     width: 2.3rem
     height: 2.3rem
     cursor: pointer
-    span
+    &-line
       width: 100%
       height: 0.4rem
       background: $white
@@ -99,7 +99,7 @@ export default {
     text-decoration: none
   &__discover-menu
     display: flex
-    flex-flow: column
+    flex-direction: column
     padding: 1.2rem
     &-link
       display: flex
@@ -119,7 +119,7 @@ export default {
         color: $white
       &:not([class*="router-link-active"]):hover
         border: 1px solid lighten($dark-grey, 35%)
-      svg
+      .svg-inline--fa
         width: 1.3rem
         margin-right: 0.9rem
     &-caption

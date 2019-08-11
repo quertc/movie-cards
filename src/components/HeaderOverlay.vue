@@ -12,7 +12,7 @@
   width: 100vw
   height: 100vh
   z-index: 500
-  transition: opacity 0.6s ease-in-out, visibility 0.6s ease-in-out
+  transition: all 0.6s ease-in-out
   background: $dark-grey
   &.overlay_active
     visibility: visible

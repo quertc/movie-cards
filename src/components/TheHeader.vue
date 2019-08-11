@@ -1,5 +1,5 @@
 <template>
-  <header>
+  <header class="header">
     <HeaderButton @open-menu="switchMenu"/>
     <HeaderSearch/>
     <HeaderMenu :class="{nav_active: isActiveMenu}" @close-menu="switchMenu"/>
@@ -19,24 +19,24 @@ export default {
       isActiveMenu: false
     };
   },
-  methods: {
-    switchMenu() {
-      this.isActiveMenu = !this.isActiveMenu;
-    }
-  },
   components: {
     HeaderSearch,
     HeaderButton,
     HeaderMenu,
     HeaderOverlay
+  },
+  methods: {
+    switchMenu() {
+      this.isActiveMenu = !this.isActiveMenu;
+    }
   }
 }
 </script>
 
 <style lang="sass" scoped>
-header
+.header
   width: 100%
-  padding: 3rem
+  padding: 3.1rem
   position: relative
   top: 0
   left: 0

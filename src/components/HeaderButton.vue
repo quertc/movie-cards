@@ -1,21 +1,21 @@
 <template>
   <div class="hamburger-menu" @click.prevent="$emit('open-menu')">
-    <span></span>
-    <span></span>
-    <span></span>
+    <span class="hamburger-menu__line"></span>
+    <span class="hamburger-menu__line"></span>
+    <span class="hamburger-menu__line"></span>
   </div>
 </template>
 
-<style scoped lang="sass">
+<style lang="sass" scoped>
 .hamburger-menu
   display: flex
   flex-flow: column
   justify-content: center
   align-content: center
-  flex-basis: 3rem
+  width: 3rem
   background: transparent
   cursor: pointer
-  span
+  &__line
     width: 100%
     height: 0.5rem
     background: $dark-grey

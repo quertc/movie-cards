@@ -4,14 +4,15 @@
       {{ category | toUpperCase }}
       <span class="main__caption-span">movies</span>
     </h1>
-    <div class="main__container">
-      <MovieItem v-for="movie in allDiscoverMovies" :key="movie.id" :movie="movie"/>
-    </div>
+    <MoviesList>
+      <MoviesListItem v-for="movie in allDiscoverMovies" :key="movie.id" :movie="movie"/>
+    </MoviesList>
   </main>
 </template>
 
 <script>
-import MovieItem from '@/components/MovieItem.vue'
+import MoviesList from '@/components/MoviesList.vue'
+import MoviesListItem from '@/components/MoviesListItem.vue'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
@@ -21,10 +22,9 @@ export default {
       required: true
     }
   },
-  computed: mapGetters(['allDiscoverMovies', 'allDiscoverCategories']),
-  methods: mapActions(['fetchDiscoverMovies']),
   components: {
-    MovieItem
+    MoviesList,
+    MoviesListItem
   },
   filters: {
     toUpperCase(value) {
@@ -33,6 +33,8 @@ export default {
       return value.replace(/_/g, ' ').toUpperCase();
     }
   },
+  computed: mapGetters(['allDiscoverMovies', 'allDiscoverCategories']),
+  methods: mapActions(['fetchDiscoverMovies']),
   beforeRouteUpdate(to, from, next) {
     if (!this.allDiscoverCategories.includes(to.params.category)) {
       next('/404');
@@ -56,12 +58,11 @@ export default {
 
 <style lang="sass" scoped>
 .main
-  margin-top: 0.6rem
-  padding: 2.2rem 3rem
+  margin-top: 0.4rem
+  padding: 1.5rem 3.1rem
   &__caption
     display: flex
-    flex-flow: column
-    align-items: left
+    flex-direction: column
     font-weight: 300
     font-size: 2.4rem
     color: $dark-grey
@@ -73,12 +74,4 @@ export default {
       font-size: 1.3rem
       color: lighten($dark-grey, 6%)
       text-transform: uppercase
-  &__container
-    padding: 0.8rem 4rem
-    display: grid
-    grid-template-columns: repeat(auto-fit, minmax(10rem, 22rem))
-    justify-content: space-evenly
-    align-content: space-between
-    -webkit-box-align: start
-    gap: 4rem 2.7rem
 </style>

@@ -1,7 +1,7 @@
 <template>
   <router-link to="/" class="movie-item">
-    <img v-if="movie.poster_path" :src="`https://image.tmdb.org/t/p/w342${movie.poster_path}`" alt="Movie poster" class="movie-item__poster">
-    <img v-else src="@/assets/no-image.png" alt="Movie poster" class="movie-item__poster">
+    <img v-if="movie.poster_path" key="success-poster" :src="`https://image.tmdb.org/t/p/w342${movie.poster_path}`" alt="Movie poster" class="movie-item__poster">
+    <img v-else key="error-poster" src="@/assets/no-image.png" alt="Movie poster" class="movie-item__poster">
     <div class="movie-item__description">{{ movie.title }}</div>
   </router-link>
 </template>
@@ -20,7 +20,7 @@ export default {
 <style lang="sass" scoped>
 .movie-item
   display: flex
-  flex-flow: column
+  flex-direction: column
   text-decoration: none
   color: lighten($dark-grey, 8%)
   border-radius: 8px
@@ -33,14 +33,12 @@ export default {
     transition: box-shadow 0.25s ease-in-out
   &__description
     display: flex
-    flex-flow: column
-    -webkit-box-pack: justify
-    -webkit-box-align: center
+    flex-direction: column
     justify-content: space-between
     align-items: center
     text-align: center
     padding: 1rem 1.8rem
-    font-size: 1.4rem
+    font-size: 1.36rem
   &:hover
     transform: scale(1.03)
     .movie-item__poster
