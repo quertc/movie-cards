@@ -1,26 +1,30 @@
 export default {
   actions: {
-    async fetchDiscoverMovies({ commit }, category) {
+    async fetchDiscoverData({ commit }, category) {
       try {
         const response = await fetch(`https://api.themoviedb.org/3/movie/${category}?api_key=${process.env.VUE_APP_SECRET}&page=1`);
         const data = await response.json();
-        commit('updateDiscoverMovies', data.results);
+        commit('updateDiscoverData', data);
       } catch(e) {
         console.error(e);
       };
     }
   },
   mutations: {
-    updateDiscoverMovies(state, movies) {
-      state.discoverMovies = movies;
+    updateDiscoverData(state, data) {
+      state.discoverData = data;
+    },
+    clearDiscoverData(state) {
+      state.discoverData = {};
     }
   },
   state: {
-    discoverMovies: [],
+    discoverData: {},
     discoverCategories: ['popular', 'top_rated', 'upcoming']
   },
   getters: {
-    allDiscoverMovies: state => state.discoverMovies,
-    allDiscoverCategories: state => state.discoverCategories
+    discoverCategories: state => state.discoverCategories,
+    discoverData: state => state.discoverData,
+    discoverDataMovies: state => state.discoverData.results
   }
 }

@@ -1,12 +1,12 @@
 <template>
   <main class="main">
-    <div v-if="allSearchMovies.length" key="search-results" class="main__rezults">
+    <div v-if="searchData.total_results" key="search-results" class="main__results">
       <h1 class="main__caption">
         {{ query | toUpperCase }}
         <span class="main__caption-span">search results</span>
       </h1>
       <MoviesList>
-        <MoviesListItem v-for="movie in allSearchMovies" :key="movie.id" :movie="movie"/>
+        <MoviesListItem v-for="movie in searchDataMovies" :key="movie.id" :movie="movie"/>
       </MoviesList>
     </div>
     <div v-else key="search-error" class="main__error">
@@ -24,7 +24,7 @@
 import MoviesList from '@/components/MoviesList.vue'
 import MoviesListItem from '@/components/MoviesListItem.vue'
 import HomeButton from '@/components/HomeButton.vue'
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions, mapMutations } from 'vuex'
 
 export default {
   props: {
@@ -45,16 +45,22 @@ export default {
       return value.replace(/_/g, ' ').toUpperCase();
     }
   },
-  computed: mapGetters(['allSearchMovies']),
-  methods: mapActions(['getSearchMovies']),
-  beforeRouteUpdate(to, from, next) {
-    this.getSearchMovies(to.params.query);
-    next();
+  computed: mapGetters(['searchDataMovies', 'searchData']),
+  methods: { 
+    ...mapActions(['getSearchData']),
+    ...mapMutations(['clearSearchData'])
   },
   beforeRouteEnter(to, from, next) {
     next(vm => {
-      vm.getSearchMovies(to.params.query);
+      vm.getSearchData(to.params.query);
     });
+  },
+  beforeRouteUpdate(to, from, next) {
+    this.getSearchData(to.params.query);
+    next();
+  },
+  beforeDestroy() {
+    this.clearSearchData();
   }
 }
 </script>
@@ -94,5 +100,6 @@ export default {
       color: $green
       text-align: center
       width: 40rem
+      height: 40rem
       margin-top: 0.3rem
 </style>

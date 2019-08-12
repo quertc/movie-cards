@@ -1,24 +1,32 @@
 export default {
   actions: {
-    async getSearchMovies({ commit }, query) {
+    async getSearchData({ commit }, query) {
       try {
         const response = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.VUE_APP_SECRET}&query=${query}&page=1`);
         const data = await response.json();
-        commit('updateSearchMovies', data.results);
+        commit('updateSearchData', data);
       } catch(e) {
         console.error(e);
       };
     }
   },
   mutations: {
-    updateSearchMovies(state, movies) {
-      state.searchMovies = movies;
+    updateSearchData(state, data) {
+      state.searchData = data;
+    },
+    clearSearchData(state) {
+      state.searchData = {
+        total_results: 1
+      };
     }
   },
   state: {
-    searchMovies: []
+    searchData: {
+      total_results: 1
+    }
   },
   getters: {
-    allSearchMovies: state => state.searchMovies
+    searchData: state => state.searchData,
+    searchDataMovies: state => state.searchData.results
   }
 }

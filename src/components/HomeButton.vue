@@ -12,10 +12,10 @@
   display: flex
   align-items: center
   text-decoration: none
-  padding: 0.5rem 1.6rem
+  padding: 0.6rem 1.7rem
   margin: 1rem
   font-size: 1.35rem
-  letter-spacing: -0.4px
+  letter-spacing: -0.3px
   border: 1px solid $dark-grey
   border-radius: 20px
   color: $dark-grey
@@ -27,6 +27,6 @@
     transform: translateY(-0.3rem)
     box-shadow: none
   .fa-home
-    width: 1.3rem
+    width: 1.4rem
     margin-right: 0.5rem
 </style>

@@ -7,6 +7,7 @@
 
 <script>
 import HomeButton from '@/components/HomeButton.vue'
+
 export default {
   components: {
     HomeButton
@@ -24,6 +25,7 @@ export default {
   align-items: center
   &__image
     width: 65rem
+    height: 42rem
     text-align: center
     margin-bottom: 0.2rem
   &__caption

@@ -5,7 +5,7 @@
       <span class="main__caption-span">movies</span>
     </h1>
     <MoviesList>
-      <MoviesListItem v-for="movie in allGenreMovies" :key="movie.id" :movie="movie"/>
+      <MoviesListItem v-for="movie in genreDataMovies" :key="movie.id" :movie="movie"/>
     </MoviesList>
   </main>
 </template>
@@ -13,7 +13,7 @@
 <script>
 import MoviesList from '@/components/MoviesList.vue'
 import MoviesListItem from '@/components/MoviesListItem.vue'
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions, mapMutations } from 'vuex'
 
 export default {
   props: {
@@ -33,37 +33,43 @@ export default {
       return value.replace(/_/g, ' ').toUpperCase();
     }
   },
-  computed: mapGetters(['allGenresList', 'allGenresName', 'allGenreMovies']),
-  methods: mapActions(['fetchGenresList', 'fetchGenreMovies']),
-  async beforeRouteUpdate(to, from, next) {
-    let genres = this.allGenresName;
-    if (!genres.length) {
-      await this.fetchGenresList();
-      genres = await this.allGenresName;
-    };
-    if (!genres.includes(to.params.genre)) {
-      next('/404');
-    } else {
-      const genreID = this.allGenresList.find(obj => obj.name.toLowerCase() == to.params.genre.replace(/_/g, ' ').toLowerCase()).id;
-      this.fetchGenreMovies(genreID);
-      next();
-    };
+  computed: mapGetters(['genresList', 'genresListNames', 'genreDataMovies']),
+  methods: {
+    ...mapActions(['fetchGenresList', 'fetchGenreData']),
+    ...mapMutations(['clearGenreData'])
   },
   beforeRouteEnter(to, from, next) {
     next(async vm => {
-      let genres = vm.allGenresName;
+      let genres = vm.genresListNames;
       if (!genres.length) {
         await vm.fetchGenresList();
-        genres = await vm.allGenresName;
+        genres = await vm.genresListNames;
       };
       if (!genres.includes(to.params.genre)) {
         next('/404');
       } else {
-        const genreID = vm.allGenresList.find(obj => obj.name.toLowerCase() == to.params.genre.replace(/_/g, ' ').toLowerCase()).id;
-        vm.fetchGenreMovies(genreID);
+        const genreID = vm.genresList.find(obj => obj.name.toLowerCase() == to.params.genre.replace(/_/g, ' ').toLowerCase()).id;
+        vm.fetchGenreData(genreID);
         next();
       };
     });
+  },
+  async beforeRouteUpdate(to, from, next) {
+    let genres = this.genresListNames;
+    if (!genres.length) {
+      await this.fetchGenresList();
+      genres = await this.genresListNames;
+    };
+    if (!genres.includes(to.params.genre)) {
+      next('/404');
+    } else {
+      const genreID = this.genresList.find(obj => obj.name.toLowerCase() == to.params.genre.replace(/_/g, ' ').toLowerCase()).id;
+      this.fetchGenreData(genreID);
+      next();
+    };
+  },
+  beforeDestroy() {
+    this.clearGenreData();
   }
 }
 </script>

@@ -5,7 +5,7 @@
       <span class="main__caption-span">movies</span>
     </h1>
     <MoviesList>
-      <MoviesListItem v-for="movie in allDiscoverMovies" :key="movie.id" :movie="movie"/>
+      <MoviesListItem v-for="movie in discoverDataMovies" :key="movie.id" :movie="movie"/>
     </MoviesList>
   </main>
 </template>
@@ -13,7 +13,7 @@
 <script>
 import MoviesList from '@/components/MoviesList.vue'
 import MoviesListItem from '@/components/MoviesListItem.vue'
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions, mapMutations } from 'vuex'
 
 export default {
   props: {
@@ -33,25 +33,31 @@ export default {
       return value.replace(/_/g, ' ').toUpperCase();
     }
   },
-  computed: mapGetters(['allDiscoverMovies', 'allDiscoverCategories']),
-  methods: mapActions(['fetchDiscoverMovies']),
-  beforeRouteUpdate(to, from, next) {
-    if (!this.allDiscoverCategories.includes(to.params.category)) {
-      next('/404');
-    } else {
-      this.fetchDiscoverMovies(to.params.category);
-      next();
-    };
+  computed: mapGetters(['discoverDataMovies', 'discoverCategories']),
+  methods: {
+    ...mapActions(['fetchDiscoverData']),
+    ...mapMutations(['clearDiscoverData'])
   },
   beforeRouteEnter(to, from, next) {
     next(vm => {
-      if (!vm.allDiscoverCategories.includes(to.params.category)) {
+      if (!vm.discoverCategories.includes(to.params.category)) {
         next('/404');
       } else {
-        vm.fetchDiscoverMovies(to.params.category);
+        vm.fetchDiscoverData(to.params.category);
         next();
       };
     });
+  },
+  beforeRouteUpdate(to, from, next) {
+    if (!this.discoverCategories.includes(to.params.category)) {
+      next('/404');
+    } else {
+      this.fetchDiscoverData(to.params.category);
+      next();
+    };
+  },
+  beforeDestroy() {
+    this.clearDiscoverData();
   }
 }
 </script>
