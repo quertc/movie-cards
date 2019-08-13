@@ -11,5 +11,5 @@
   grid-template-columns: repeat(auto-fit, minmax(10rem, 22rem))
   justify-content: space-evenly
   align-content: space-between
-  gap: 4rem 2.65rem
+  grid-gap: 4rem 2.65rem
 </style>

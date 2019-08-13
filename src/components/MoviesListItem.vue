@@ -33,10 +33,6 @@ export default {
     font-size: 1.36rem
     transition: box-shadow 0.25s ease-in-out
   &__description
-    display: flex
-    flex-direction: column
-    justify-content: space-between
-    align-items: center
     text-align: center
     padding: 1rem 1.8rem
     font-size: 1.36rem

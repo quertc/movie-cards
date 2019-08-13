@@ -37,7 +37,7 @@
     </div>
     <div class="nav__copyright">
       Copyright ©
-      <a href="https://github.com/quertc" target="_blank" rel="noopener" title="GitHub profile" class="nav__copyright-link">Shkatov</a>
+      <a href="https://github.com/quertc" target="_blank" rel="noopener" title="GitHub profile" class="nav__copyright-link">Quertc</a>
     </div>
   </nav>
 </template>
@@ -99,14 +99,12 @@ export default {
     margin: 2.5rem auto
     text-decoration: none
   &__discover-menu
-    display: flex
-    flex-direction: column
     padding: 1.2rem
     &-link
       display: flex
       align-items: center
-      padding: 1.25rem 2.4rem
-      margin: 0.4rem 0.6rem
+      padding: 1.3rem 2.4rem
+      margin: 0.5rem 0.6rem
       font-size: 1.2rem
       text-decoration: none
       letter-spacing: 1px
@@ -133,7 +131,7 @@ export default {
       &[data-category="genres"]
         margin-top: 4rem
   &__copyright
-    padding: 1rem 0 1.2rem 2rem
+    padding: 1rem 0 1.2rem 2.4rem
     color: lighten($dark-grey, 75%)
     font-size: 1.15rem
     letter-spacing: 0.5px
