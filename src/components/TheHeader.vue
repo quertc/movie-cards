@@ -3,7 +3,7 @@
     <HeaderButton @open-menu="switchMenu"/>
     <HeaderSearch/>
     <HeaderMenu :class="{nav_active: isActiveMenu}" @close-menu="switchMenu"/>
-    <HeaderOverlay :class="{overlay_active: isActiveMenu}" @close-menu="switchMenu"/>
+    <HeaderMenuOverlay :class="{overlay_active: isActiveMenu}" @close-menu="switchMenu"/>
   </header>
 </template>
 
@@ -11,7 +11,7 @@
 import HeaderButton from '@/components/HeaderButton.vue'
 import HeaderSearch from '@/components/HeaderSearch.vue'
 import HeaderMenu from '@/components/HeaderMenu.vue'
-import HeaderOverlay from '@/components/HeaderOverlay.vue'
+import HeaderMenuOverlay from '@/components/HeaderMenuOverlay.vue'
 
 export default {
   data() {
@@ -23,7 +23,7 @@ export default {
     HeaderSearch,
     HeaderButton,
     HeaderMenu,
-    HeaderOverlay
+    HeaderMenuOverlay
   },
   methods: {
     switchMenu() {

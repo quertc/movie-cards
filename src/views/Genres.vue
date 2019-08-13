@@ -1,18 +1,18 @@
 <template>
   <main class="main">
-    <h1 class="main__caption">
-      {{ genre | toUpperCase }}
-      <span class="main__caption-span">movies</span>
-    </h1>
+    <MoviesListTitle :title="genre" subtitle="movies" class="main__title"/>
     <MoviesList>
       <MoviesListItem v-for="movie in genreDataMovies" :key="movie.id" :movie="movie"/>
     </MoviesList>
+    <MoviesListPagination @load-more="loadMoreMovies" class="main__pagination"/>
   </main>
 </template>
 
 <script>
 import MoviesList from '@/components/MoviesList.vue'
 import MoviesListItem from '@/components/MoviesListItem.vue'
+import MoviesListTitle from '@/components/MoviesListTitle.vue'
+import MoviesListPagination from '@/components/MoviesListPagination.vue'
 import { mapGetters, mapActions, mapMutations } from 'vuex'
 
 export default {
@@ -24,7 +24,9 @@ export default {
   },
   components: {
     MoviesList,
-    MoviesListItem
+    MoviesListItem,
+    MoviesListTitle,
+    MoviesListPagination
   },
   filters: {
     toUpperCase(value) {
@@ -33,10 +35,14 @@ export default {
       return value.replace(/_/g, ' ').toUpperCase();
     }
   },
-  computed: mapGetters(['genresList', 'genresListNames', 'genreDataMovies']),
+  computed: mapGetters(['genresList', 'genresListNames', 'genreData', 'genreDataMovies']),
   methods: {
     ...mapActions(['fetchGenresList', 'fetchGenreData']),
-    ...mapMutations(['clearGenreData'])
+    ...mapMutations(['clearGenreData']),
+    loadMoreMovies() {
+      const genreID = this.genresList.find(obj => obj.name.toLowerCase() == this.$route.params.genre.replace(/_/g, ' ').toLowerCase()).id;
+      this.fetchGenreData([genreID, this.genreData.page + 1]);
+    }
   },
   beforeRouteEnter(to, from, next) {
     next(async vm => {
@@ -49,8 +55,7 @@ export default {
         next('/404');
       } else {
         const genreID = vm.genresList.find(obj => obj.name.toLowerCase() == to.params.genre.replace(/_/g, ' ').toLowerCase()).id;
-        vm.fetchGenreData(genreID);
-        next();
+        vm.fetchGenreData([genreID]);
       };
     });
   },
@@ -64,7 +69,7 @@ export default {
       next('/404');
     } else {
       const genreID = this.genresList.find(obj => obj.name.toLowerCase() == to.params.genre.replace(/_/g, ' ').toLowerCase()).id;
-      this.fetchGenreData(genreID);
+      this.fetchGenreData([genreID]);
       next();
     };
   },
@@ -78,18 +83,8 @@ export default {
 .main
   margin-top: 0.4rem
   padding: 1.5rem 3.1rem
-  &__caption
-    display: flex
-    flex-direction: column
-    font-weight: 300
-    font-size: 2.4rem
-    color: $dark-grey
-    letter-spacing: -0.25px
-    line-height: 1.15
+  &__title
     margin-bottom: 3.6rem
-    &-span
-      font-weight: 600
-      font-size: 1.3rem
-      color: lighten($dark-grey, 6%)
-      text-transform: uppercase
+  &__pagination
+    margin-top: 1.8rem
 </style>

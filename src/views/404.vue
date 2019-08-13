@@ -28,8 +28,4 @@ export default {
     height: 42rem
     text-align: center
     margin-bottom: 0.2rem
-  &__caption
-    font-weight: 300
-    font-size: 3rem
-    color: $dark-grey
 </style>

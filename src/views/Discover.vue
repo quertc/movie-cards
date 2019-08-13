@@ -1,18 +1,18 @@
 <template>
   <main class="main">
-    <h1 class="main__caption">
-      {{ category | toUpperCase }}
-      <span class="main__caption-span">movies</span>
-    </h1>
+    <MoviesListTitle :title="category" subtitle="movies" class="main__title"/>
     <MoviesList>
       <MoviesListItem v-for="movie in discoverDataMovies" :key="movie.id" :movie="movie"/>
     </MoviesList>
+    <MoviesListPagination @load-more="loadMoreMovies" class="main__pagination"/>
   </main>
 </template>
 
 <script>
 import MoviesList from '@/components/MoviesList.vue'
 import MoviesListItem from '@/components/MoviesListItem.vue'
+import MoviesListTitle from '@/components/MoviesListTitle.vue'
+import MoviesListPagination from '@/components/MoviesListPagination.vue'
 import { mapGetters, mapActions, mapMutations } from 'vuex'
 
 export default {
@@ -24,7 +24,9 @@ export default {
   },
   components: {
     MoviesList,
-    MoviesListItem
+    MoviesListItem,
+    MoviesListTitle,
+    MoviesListPagination
   },
   filters: {
     toUpperCase(value) {
@@ -33,18 +35,20 @@ export default {
       return value.replace(/_/g, ' ').toUpperCase();
     }
   },
-  computed: mapGetters(['discoverDataMovies', 'discoverCategories']),
+  computed: mapGetters(['discoverData', 'discoverDataMovies', 'discoverCategories']),
   methods: {
     ...mapActions(['fetchDiscoverData']),
-    ...mapMutations(['clearDiscoverData'])
+    ...mapMutations(['clearDiscoverData']),
+    loadMoreMovies() {
+      this.fetchDiscoverData([this.$route.params.category, this.discoverData.page + 1]);
+    }
   },
   beforeRouteEnter(to, from, next) {
     next(vm => {
       if (!vm.discoverCategories.includes(to.params.category)) {
         next('/404');
       } else {
-        vm.fetchDiscoverData(to.params.category);
-        next();
+        vm.fetchDiscoverData([to.params.category]);
       };
     });
   },
@@ -52,7 +56,7 @@ export default {
     if (!this.discoverCategories.includes(to.params.category)) {
       next('/404');
     } else {
-      this.fetchDiscoverData(to.params.category);
+      this.fetchDiscoverData([to.params.category]);
       next();
     };
   },
@@ -66,18 +70,8 @@ export default {
 .main
   margin-top: 0.4rem
   padding: 1.5rem 3.1rem
-  &__caption
-    display: flex
-    flex-direction: column
-    font-weight: 300
-    font-size: 2.4rem
-    color: $dark-grey
-    letter-spacing: -0.25px
-    line-height: 1.1
+  &__title
     margin-bottom: 3.6rem
-    &-span
-      font-weight: 600
-      font-size: 1.3rem
-      color: lighten($dark-grey, 6%)
-      text-transform: uppercase
+  &__pagination
+    margin-top: 1.8rem
 </style>

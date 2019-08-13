@@ -1,17 +1,15 @@
 <template>
   <main class="main">
     <div v-if="searchData.total_results" key="search-results" class="main__results">
-      <h1 class="main__caption">
-        {{ query | toUpperCase }}
-        <span class="main__caption-span">search results</span>
-      </h1>
+      <MoviesListTitle :title="query" subtitle="search results" class="main__title"/>
       <MoviesList>
         <MoviesListItem v-for="movie in searchDataMovies" :key="movie.id" :movie="movie"/>
       </MoviesList>
+      <MoviesListPagination @load-more="loadMoreMovies" class="main__pagination" :class="{main__pagination_active: isActive}"/>
     </div>
     <div v-else key="search-error" class="main__error">
       <div class="main__not-found">
-        <h2 class="main__not-found-caption">Sorry!</h2>
+        <h2 class="main__not-found-title">Sorry!</h2>
         <p class="main__not-found-description">Nothing found for {{ $route.params.query }}</p>
         <img src="@/assets/not-found.svg" class="main__not-found-image" alt="Not found">
         <HomeButton/>
@@ -23,10 +21,17 @@
 <script>
 import MoviesList from '@/components/MoviesList.vue'
 import MoviesListItem from '@/components/MoviesListItem.vue'
+import MoviesListTitle from '@/components/MoviesListTitle.vue'
+import MoviesListPagination from '@/components/MoviesListPagination.vue'
 import HomeButton from '@/components/HomeButton.vue'
 import { mapGetters, mapActions, mapMutations } from 'vuex'
 
 export default {
+  data() {
+    return {
+      isActive: false
+    }
+  },
   props: {
     query: {
       type: String,
@@ -36,6 +41,8 @@ export default {
   components: {
     MoviesList,
     MoviesListItem,
+    MoviesListTitle,
+    MoviesListPagination,
     HomeButton
   },
   filters: {
@@ -48,15 +55,27 @@ export default {
   computed: mapGetters(['searchDataMovies', 'searchData']),
   methods: { 
     ...mapActions(['getSearchData']),
-    ...mapMutations(['clearSearchData'])
+    ...mapMutations(['clearSearchData']),
+    loadMoreMovies() {
+      if (this.searchData.page + 1>= this.searchData.total_pages) {
+        this.isActive = true;
+      };
+      this.getSearchData([this.$route.params.query, this.searchData.page + 1]);
+    }
   },
   beforeRouteEnter(to, from, next) {
-    next(vm => {
-      vm.getSearchData(to.params.query);
+    next(async vm => {
+      await vm.getSearchData([to.params.query]);
+      if (vm.searchData.page >= vm.searchData.total_pages) {
+        vm.isActive = true;
+      };
     });
   },
   beforeRouteUpdate(to, from, next) {
-    this.getSearchData(to.params.query);
+    this.getSearchData([to.params.query]);
+    if (this.searchData.page >= this.searchData.total_pages) {
+      this.isActive = true;
+    };
     next();
   },
   beforeDestroy() {
@@ -69,26 +88,14 @@ export default {
 .main
   margin-top: 0.4rem
   padding: 1.5rem 3.1rem
-  &__caption
-    display: flex
-    flex-direction: column
-    font-weight: 300
-    font-size: 2.4rem
-    color: $dark-grey
-    letter-spacing: -0.25px
-    line-height: 1.1
+  &__title
     margin-bottom: 3.6rem
-    &-span
-      font-weight: 600
-      font-size: 1.3rem
-      color: lighten($dark-grey, 6%)
-      text-transform: uppercase
   &__not-found
     display: flex
     flex-direction: column
     justify-content: center
     align-items: center
-    &-caption
+    &-title
       font-weight: 300
       font-size: 3rem
       color: $dark-grey
@@ -102,4 +109,9 @@ export default {
       width: 40rem
       height: 40rem
       margin-top: 0.3rem
+  &__pagination
+    margin-top: 1.6rem
+    &.main__pagination_active
+      visibility: hidden
+      opacity: 0
 </style>
