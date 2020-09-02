@@ -1,6 +1,11 @@
 <template>
   <div class="pagination">
-    <button class="pagination__button" @click="$emit('load-more')">LOAD MORE</button>
+    <button
+      class="pagination__button"
+      @click="$emit('load-more')"
+    >
+      LOAD MORE
+    </button>
   </div>
 </template>
 
@@ -8,16 +13,15 @@
 .pagination
   display: flex
   justify-content: center
-  width: 100%
   padding: 1rem
   &__button
-    padding: 1rem 0.8rem
+    padding: 0.9rem 1.1rem
     background: $white
-    border: 1px solid $dark-grey
+    border: 0.1rem solid $dark-grey
     text-align: center
     cursor: pointer
+    box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.15)
     transition: all 0.3s ease-in-out
-    box-shadow: 0 0 5rem rgba(0,0,0,0.14)
     &:hover
       background: $dark-grey
       color: $white

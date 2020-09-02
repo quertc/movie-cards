@@ -1,82 +1,93 @@
 <template>
   <main class="main">
-    <MoviesListTitle :title="genre" subtitle="movies" class="main__title"/>
+    <MoviesListTitle
+      :title="genre"
+      subtitle="movies"
+      class="main__title"
+    />
     <MoviesList>
-      <MoviesListItem v-for="movie in genreDataMovies" :key="movie.id" :movie="movie"/>
+      <MoviesListItem
+        v-for="movie in genreDataMovies"
+        :key="movie.id"
+        :movie="movie"
+      />
     </MoviesList>
-    <MoviesListPagination @load-more="loadMoreMovies" class="main__pagination"/>
+    <MoviesListPagination
+      class="main__pagination"
+      :class="{ main__pagination_hidden: hidePagination }"
+      @load-more="loadMoreMovies"
+    />
   </main>
 </template>
 
 <script>
-import MoviesList from '@/components/MoviesList.vue'
-import MoviesListItem from '@/components/MoviesListItem.vue'
-import MoviesListTitle from '@/components/MoviesListTitle.vue'
-import MoviesListPagination from '@/components/MoviesListPagination.vue'
-import { mapGetters, mapActions, mapMutations } from 'vuex'
+import MoviesListTitle from '@/components/MoviesListTitle.vue';
+import MoviesList from '@/components/MoviesList.vue';
+import MoviesListItem from '@/components/MoviesListItem.vue';
+import MoviesListPagination from '@/components/MoviesListPagination.vue';
+import {
+  mapState, mapGetters, mapActions, mapMutations,
+} from 'vuex';
 
 export default {
+  components: {
+    MoviesListTitle,
+    MoviesList,
+    MoviesListItem,
+    MoviesListPagination,
+  },
   props: {
     genre: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
-  components: {
-    MoviesList,
-    MoviesListItem,
-    MoviesListTitle,
-    MoviesListPagination
+  data() {
+    return {
+      hidePagination: false,
+    };
   },
-  filters: {
-    toUpperCase(value) {
-      if (!value) return '';
-      value = value.toString();
-      return value.replace(/_/g, ' ').toUpperCase();
-    }
+  computed: {
+    ...mapState({
+      genresList: state => state.genres.genresList,
+      genreData: state => state.genres.genreData,
+      genreDataMovies: state => state.genres.genreDataMovies,
+    }),
+    ...mapGetters(['genresListNames']),
+    genreId() {
+      return this.genresList.find(genre => genre.name.toLowerCase() === this.$route.params.genre.replace(/_/g, ' ').toLowerCase()).id;
+    },
   },
-  computed: mapGetters(['genresList', 'genresListNames', 'genreData', 'genreDataMovies']),
-  methods: {
-    ...mapActions(['fetchGenresList', 'fetchGenreData']),
-    ...mapMutations(['clearGenreData']),
-    loadMoreMovies() {
-      const genreID = this.genresList.find(obj => obj.name.toLowerCase() == this.$route.params.genre.replace(/_/g, ' ').toLowerCase()).id;
-      this.fetchGenreData([genreID, this.genreData.page + 1]);
-    }
-  },
-  beforeRouteEnter(to, from, next) {
-    next(async vm => {
-      let genres = vm.genresListNames;
-      if (!genres.length) {
-        await vm.fetchGenresList();
-        genres = await vm.genresListNames;
-      };
-      if (!genres.includes(to.params.genre)) {
-        next('/404');
-      } else {
-        const genreID = vm.genresList.find(obj => obj.name.toLowerCase() == to.params.genre.replace(/_/g, ' ').toLowerCase()).id;
-        vm.fetchGenreData([genreID]);
-      };
-    });
-  },
-  async beforeRouteUpdate(to, from, next) {
-    let genres = this.genresListNames;
-    if (!genres.length) {
+  async mounted() {
+    if (!this.genresListNames.length) {
       await this.fetchGenresList();
-      genres = await this.genresListNames;
-    };
-    if (!genres.includes(to.params.genre)) {
-      next('/404');
+    }
+
+    if (!this.genresListNames.includes(this.$route.params.genre)) {
+      this.$router.push('/404');
     } else {
-      const genreID = this.genresList.find(obj => obj.name.toLowerCase() == to.params.genre.replace(/_/g, ' ').toLowerCase()).id;
-      this.fetchGenreData([genreID]);
-      next();
-    };
+      await this.fetchGenreData([this.genreId]);
+
+      if (this.genreData.page >= this.genreData.total_pages) {
+        this.hidePagination = true;
+      }
+    }
   },
   beforeDestroy() {
-    this.clearGenreData();
-  }
-}
+    this.clearGenreDataMovies();
+  },
+  methods: {
+    ...mapActions(['fetchGenresList', 'fetchGenreData']),
+    ...mapMutations(['clearGenreDataMovies']),
+    loadMoreMovies() {
+      if (this.genreData.page + 1 >= this.genreData.total_pages) {
+        this.hidePagination = true;
+      }
+
+      this.fetchGenreData([this.genreId, this.genreData.page + 1]);
+    },
+  },
+};
 </script>
 
 <style lang="sass" scoped>
@@ -86,5 +97,8 @@ export default {
   &__title
     margin-bottom: 3.6rem
   &__pagination
-    margin-top: 1.8rem
+    margin-top: 1.4rem
+    &_hidden
+      visibility: hidden
+      opacity: 0
 </style>

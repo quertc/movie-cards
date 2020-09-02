@@ -1,25 +1,8 @@
 export default {
-  actions: {
-    async fetchGenresList({ commit }) {
-      try {
-        const response = await fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${process.env.VUE_APP_SECRET}`);
-        const data = await response.json();
-        commit('updateGenresList', data.genres);
-        return data.genres;
-      } catch(e) {
-        console.error(e);
-      };
-    },
-    async fetchGenreData({ commit }, [genreID, page = 1]) {
-      try {
-        const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.VUE_APP_SECRET}&sort_by=popularity.desc&page=${page}&with_genres=${genreID}`);
-        const data = await response.json();
-        commit('updateGenreData', data);
-        return data;
-      } catch(e) {
-        console.error(e);
-      };
-    }
+  state: {
+    genresList: [],
+    genreData: {},
+    genreDataMovies: [],
   },
   mutations: {
     updateGenresList(state, genres) {
@@ -29,20 +12,31 @@ export default {
       state.genreData = data;
       state.genreDataMovies = state.genreDataMovies.concat(data.results);
     },
-    clearGenreData(state) {
-      state.genreData = {};
+    clearGenreDataMovies(state) {
       state.genreDataMovies = [];
-    }
+    },
   },
-  state: {
-    genresList: [],
-    genreData: {},
-    genreDataMovies: []
+  actions: {
+    async fetchGenresList({ commit }) {
+      try {
+        const response = await fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${process.env.VUE_APP_SECRET}`);
+        const data = await response.json();
+        commit('updateGenresList', data.genres);
+      } catch (e) {
+        console.error(e);
+      }
+    },
+    async fetchGenreData({ commit }, [genreId, page = 1]) {
+      try {
+        const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.VUE_APP_SECRET}&sort_by=popularity.desc&page=${page}&with_genres=${genreId}`);
+        const data = await response.json();
+        commit('updateGenreData', data);
+      } catch (e) {
+        console.error(e);
+      }
+    },
   },
   getters: {
-    genresList: state => state.genresList,
-    genresListNames: state => state.genresList.map(obj => obj.name.replace(/ /g, '_').toLowerCase()),
-    genreData: state => state.genreData,
-    genreDataMovies: state => state.genreDataMovies
-  }
-}
+    genresListNames: state => state.genresList.map(genre => genre.name.replace(/ /g, '_').toLowerCase()),
+  },
+};

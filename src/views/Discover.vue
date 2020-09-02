@@ -1,69 +1,81 @@
 <template>
   <main class="main">
-    <MoviesListTitle :title="category" subtitle="movies" class="main__title"/>
+    <MoviesListTitle
+      :title="category"
+      subtitle="movies"
+      class="main__title"
+    />
     <MoviesList>
-      <MoviesListItem v-for="movie in discoverDataMovies" :key="movie.id" :movie="movie"/>
+      <MoviesListItem
+        v-for="movie in discoverDataMovies"
+        :key="movie.id"
+        :movie="movie"
+      />
     </MoviesList>
-    <MoviesListPagination @load-more="loadMoreMovies" class="main__pagination"/>
+    <MoviesListPagination
+      class="main__pagination"
+      :class="{ main__pagination_hidden: hidePagination }"
+      @load-more="loadMoreMovies"
+    />
   </main>
 </template>
 
 <script>
-import MoviesList from '@/components/MoviesList.vue'
-import MoviesListItem from '@/components/MoviesListItem.vue'
-import MoviesListTitle from '@/components/MoviesListTitle.vue'
-import MoviesListPagination from '@/components/MoviesListPagination.vue'
-import { mapGetters, mapActions, mapMutations } from 'vuex'
+import MoviesListTitle from '@/components/MoviesListTitle.vue';
+import MoviesList from '@/components/MoviesList.vue';
+import MoviesListItem from '@/components/MoviesListItem.vue';
+import MoviesListPagination from '@/components/MoviesListPagination.vue';
+import { mapState, mapActions, mapMutations } from 'vuex';
 
 export default {
+  components: {
+    MoviesListTitle,
+    MoviesList,
+    MoviesListItem,
+    MoviesListPagination,
+  },
   props: {
     category: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
-  components: {
-    MoviesList,
-    MoviesListItem,
-    MoviesListTitle,
-    MoviesListPagination
-  },
-  filters: {
-    toUpperCase(value) {
-      if (!value) return '';
-      value = value.toString();
-      return value.replace(/_/g, ' ').toUpperCase();
-    }
-  },
-  computed: mapGetters(['discoverData', 'discoverDataMovies', 'discoverCategories']),
-  methods: {
-    ...mapActions(['fetchDiscoverData']),
-    ...mapMutations(['clearDiscoverData']),
-    loadMoreMovies() {
-      this.fetchDiscoverData([this.$route.params.category, this.discoverData.page + 1]);
-    }
-  },
-  beforeRouteEnter(to, from, next) {
-    next(vm => {
-      if (!vm.discoverCategories.includes(to.params.category)) {
-        next('/404');
-      } else {
-        vm.fetchDiscoverData([to.params.category]);
-      };
-    });
-  },
-  beforeRouteUpdate(to, from, next) {
-    if (!this.discoverCategories.includes(to.params.category)) {
-      next('/404');
-    } else {
-      this.fetchDiscoverData([to.params.category]);
-      next();
+  data() {
+    return {
+      hidePagination: false,
     };
   },
+  computed: mapState({
+    discoverData: state => state.discover.discoverData,
+    discoverDataMovies: state => state.discover.discoverDataMovies,
+    discoverCategories: state => state.discover.discoverCategories,
+  }),
+  async mounted() {
+    if (!this.discoverCategories.includes(this.$route.params.category)) {
+      this.$router.push('/404');
+    } else {
+      await this.fetchDiscoverData([this.$route.params.category]);
+
+      if (this.discoverData.page >= this.discoverData.total_pages) {
+        this.hidePagination = true;
+      }
+    }
+  },
   beforeDestroy() {
-    this.clearDiscoverData();
-  }
-}
+    this.clearDiscoverDataMovies();
+  },
+  methods: {
+    ...mapActions(['fetchDiscoverData']),
+    ...mapMutations(['clearDiscoverDataMovies']),
+    loadMoreMovies() {
+      if (this.discoverData.page + 1 >= this.discoverData.total_pages) {
+        this.hidePagination = true;
+      }
+
+      this.fetchDiscoverData([this.$route.params.category, this.discoverData.page + 1]);
+    },
+  },
+};
 </script>
 
 <style lang="sass" scoped>
@@ -73,5 +85,8 @@ export default {
   &__title
     margin-bottom: 3.6rem
   &__pagination
-    margin-top: 1.8rem
+    margin-top: 1.4rem
+    &_hidden
+      visibility: hidden
+      opacity: 0
 </style>

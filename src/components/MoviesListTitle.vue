@@ -7,30 +7,30 @@
 
 <script>
 export default {
-  props: {
-    title: {
-      type: String,
-      required: true
-    },
-    subtitle: {
-      type: String,
-      required: true
-    }
-  },
   filters: {
     toUpperCase(value) {
       if (!value) return '';
-      value = value.toString();
+
       return value.replace(/_/g, ' ').toUpperCase();
-    }
-  }
-}
+    },
+  },
+  props: {
+    title: {
+      type: String,
+      required: true,
+    },
+    subtitle: {
+      type: String,
+      required: true,
+    },
+  },
+};
 </script>
 
 <style lang="sass" scoped>
 .title
   display: flex
-  flex-direction: column
+  flex-flow: column
   font-weight: 300
   font-size: 2.35rem
   color: $dark-grey

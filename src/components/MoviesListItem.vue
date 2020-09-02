@@ -1,8 +1,23 @@
 <template>
-  <router-link to="/" class="movie-item">
-    <img v-if="movie.poster_path" key="success-poster" :src="`https://image.tmdb.org/t/p/w342${movie.poster_path}`" :alt="`${movie.title} movie poster`" class="movie-item__poster">
-    <img v-else key="error-poster" src="@/assets/no-image.png" :alt="`${movie.title} movie poster`" class="movie-item__poster">
-    <div class="movie-item__description">{{ movie.title }}</div>
+  <router-link
+    to="/"
+    class="movie-item"
+  >
+    <img
+      v-if="movie.poster_path"
+      key="success-poster"
+      :src="`https://image.tmdb.org/t/p/w342${movie.poster_path}`"
+      class="movie-item__poster"
+    >
+    <img
+      v-else
+      key="error-poster"
+      src="@/assets/no-image.png"
+      class="movie-item__poster"
+    >
+    <div class="movie-item__description">
+      {{ movie.title }}
+    </div>
   </router-link>
 </template>
 
@@ -11,33 +26,35 @@ export default {
   props: {
     movie: {
       type: Object,
-      required: true
-    }
-  }
-}
+      required: true,
+    },
+  },
+};
 </script>
 
 <style lang="sass" scoped>
 .movie-item
+  position: relative
   display: flex
-  flex-direction: column
+  flex-flow: column
+  align-items: center
   text-decoration: none
   color: lighten($dark-grey, 8%)
-  border-radius: 8px
+  border-radius: 0.8rem
   transition: transform 0.25s ease-in-out
   &__poster
     width: 100%
     height: 33rem
-    border-radius: 8px
-    box-shadow: 0 1rem 4rem rgba(0,0,0,0.14)
-    font-size: 1.36rem
+    border-radius: 0.8rem
+    box-shadow: 0 1rem 4rem rgba(0, 0, 0, 0.14)
+    font-size: 1.38rem
     transition: box-shadow 0.25s ease-in-out
   &__description
-    text-align: center
     padding: 1rem 1.8rem
-    font-size: 1.36rem
+    text-align: center
+    font-size: 1.38rem
   &:hover
     transform: scale(1.03)
     .movie-item__poster
-      box-shadow: 0 1rem 3rem rgba(0,0,0,0.2)
+      box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.2)
 </style>
