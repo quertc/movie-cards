@@ -2,25 +2,25 @@
 
 ## Project setup
 
-```bash
+```cmd
 npm install
 ```
 
 ### Compiles and hot-reloads for development
 
-```bash
+```cmd
 npm run serve
 ```
 
 ### Compiles and minifies for production
 
-```bash
+```cmd
 npm run build
 ```
 
 ### Lints and fixes files
 
-```bash
+```cmd
 npm run lint
 ```
 
