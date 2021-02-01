@@ -56,16 +56,16 @@ export default {
 .search-form
   display: flex
   height: 3.6rem
-  box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.15)
+  border-radius: .7rem
   background: $dark-grey
-  border-radius: 0.7rem
+  box-shadow: 0 .4rem .8rem rgba(0, 0, 0, .15)
   &__input
     padding: 1rem
-    background: transparent
-    border-radius: 0.7rem
     color: $white
     border: none
+    border-radius: .7rem
     outline: none
+    background: transparent
   &__button
     display: flex
     align-content: center

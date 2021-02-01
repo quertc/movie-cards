@@ -12,13 +12,13 @@
   top: 0
   left: 0
   z-index: 500
+  visibility: hidden
   width: 100vw
   height: 100vh
-  visibility: hidden
+  transition: visibility .6s ease-in-out, opacity .6s ease-in-out
   opacity: 0
   background: $dark-grey
-  transition: visibility 0.6s ease-in-out, opacity 0.6s ease-in-out
   &.overlay_active
     visibility: visible
-    opacity: 0.4
+    opacity: .4
 </style>

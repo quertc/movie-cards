@@ -38,17 +38,17 @@ export default {
   display: flex
   flex-flow: column
   align-items: center
+  transition: transform .25s ease-in-out
   text-decoration: none
   color: lighten($dark-grey, 8%)
-  border-radius: 0.8rem
-  transition: transform 0.25s ease-in-out
+  border-radius: .8rem
   &__poster
     width: 100%
     height: 33rem
-    border-radius: 0.8rem
-    box-shadow: 0 1rem 4rem rgba(0, 0, 0, 0.14)
+    transition: box-shadow .25s ease-in-out
+    border-radius: .8rem
+    box-shadow: 0 1rem 4rem rgba(0, 0, 0, .14)
     font-size: 1.38rem
-    transition: box-shadow 0.25s ease-in-out
   &__description
     padding: 1rem 1.8rem
     text-align: center
@@ -56,5 +56,5 @@ export default {
   &:hover
     transform: scale(1.03)
     .movie-item__poster
-      box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.2)
+      box-shadow: 0 1rem 3rem rgba(0, 0, 0, .2)
 </style>

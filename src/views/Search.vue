@@ -105,7 +105,7 @@ export default {
 
 <style lang="sass" scoped>
 .main
-  margin-top: 0.4rem
+  margin-top: .4rem
   padding: 1.5rem 3.1rem
   &__title
     margin-bottom: 3.6rem
@@ -115,19 +115,19 @@ export default {
     justify-content: center
     align-items: center
     &-title
+      color: $dark-grey
       font-size: 3rem
       font-weight: 300
-      color: $dark-grey
     &-description
       text-align: center
-      font-weight: 600
       color: lighten($dark-grey, 6%)
+      font-weight: 600
     &-image
       width: 40rem
       height: 40rem
-      margin: 0.4rem 0
-      line-height: 40rem
+      margin: .4rem 0
       text-align: center
+      line-height: 40rem
   &__pagination
     margin-top: 1.4rem
     &_hidden

@@ -15,16 +15,16 @@
   justify-content: center
   padding: 1rem
   &__button
-    padding: 0.9rem 1.1rem
-    background: $white
-    border: 0.1rem solid $dark-grey
-    text-align: center
+    padding: .9rem 1.1rem
     cursor: pointer
-    box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.15)
-    transition: all 0.3s ease-in-out
+    transition: all .3s ease-in-out
+    text-align: center
+    border: .1rem solid $dark-grey
+    background: $white
+    box-shadow: 0 .4rem .8rem rgba(0, 0, 0, .15)
     &:hover
-      background: $dark-grey
+      transform: translateY(-.3rem)
       color: $white
-      transform: translateY(-0.3rem)
+      background: $dark-grey
       box-shadow: none
 </style>

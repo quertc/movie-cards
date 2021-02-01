@@ -80,7 +80,7 @@ export default {
 
 <style lang="sass" scoped>
 .main
-  margin-top: 0.4rem
+  margin-top: .4rem
   padding: 1.5rem 3.1rem
   &__title
     margin-bottom: 3.6rem

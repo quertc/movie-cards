@@ -152,12 +152,12 @@ export default {
   left: -29rem
   z-index: 1000
   display: flex
+  overflow-y: auto
   flex-flow: column
   width: 29rem
   height: 100%
-  overflow-y: auto
+  transition: left .5s ease-in-out
   background: $dark-grey
-  transition: left 0.5s ease-in-out
   &.nav_active
     left: 0
   &__close-menu
@@ -169,14 +169,14 @@ export default {
     align-items: center
     width: 2.3rem
     height: 2.3rem
-    background: transparent
     cursor: pointer
+    background: transparent
     &-line
       position: absolute
       width: 100%
-      height: 0.4rem
+      height: .4rem
+      border-radius: .8rem
       background: $white
-      border-radius: 0.8rem
       &:first-child
         transform: rotate(45deg)
       &:last-child
@@ -185,48 +185,48 @@ export default {
     width: 15rem
     height: 7rem
     margin: 2.5rem auto
-    color: $green
     text-align: center
     text-decoration: none
+    color: $green
   &__discover-menu
     padding: 1.2rem
     &-link
       display: flex
       align-items: center
-      margin: 0.5rem 0.6rem
+      margin: .5rem .6rem
       padding: 1.3rem 2.4rem
-      font-size: 1.2rem
+      transition: border .3s, color .3s
       text-decoration: none
-      letter-spacing: 0.1rem
-      line-height: 1
-      border: 0.1rem solid transparent
-      border-radius: 2rem
+      letter-spacing: .1rem
       color: lighten($dark-grey, 35%)
-      transition: border 0.3s, color 0.3s
+      border: .1rem solid transparent
+      border-radius: 2rem
+      font-size: 1.2rem
+      line-height: 1
       &.router-link-active
-        border-color: $white
         color: $white
-      &:not([class*="router-link-active"]):hover
+        border-color: $white
+      &:not([class*='router-link-active']):hover
         border-color: lighten($dark-grey, 35%)
       .svg-inline--fa
         width: 1.2rem
-        margin-right: 0.9rem
+        margin-right: .9rem
     &-title
-      margin: 0 0 0.8rem 2rem
-      font-size: 1.2rem
+      margin: 0 0 .8rem 2rem
+      letter-spacing: -.03rem
       text-transform: uppercase
-      letter-spacing: -0.03rem
       color: $white
-      &[data-category="genres"]
+      font-size: 1.2rem
+      &[data-category='genres']
         margin-top: 4rem
   &__copyright
     padding: 1rem 0 1.2rem 2.4rem
+    letter-spacing: .05rem
     color: lighten($dark-grey, 75%)
     font-size: 1.15rem
-    letter-spacing: 0.05rem
     &-link
-      margin-left: 0.2rem
-      color: lighten($dark-grey, 75%)
+      margin-left: .2rem
       text-decoration: none
+      color: lighten($dark-grey, 75%)
       font-weight: 600
 </style>

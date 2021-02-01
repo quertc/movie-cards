@@ -17,11 +17,11 @@
   justify-content: center
   align-content: center
   width: 3.2rem
-  background: transparent
   cursor: pointer
+  background: transparent
   &__line
-    height: 0.5rem
-    margin: 0.25rem 0
-    background: $dark-grey
+    height: .5rem
+    margin: .25rem 0
     border-radius: 1rem
+    background: $dark-grey
 </style>

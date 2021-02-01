@@ -26,21 +26,21 @@
 .home-button
   display: flex
   align-items: center
-  padding: 0.7rem 1.7rem
+  padding: .7rem 1.7rem
+  transition: all .3s ease-in-out
   text-decoration: none
-  font-size: 1.3rem
-  letter-spacing: -0.03rem
-  border: 0.1rem solid $dark-grey
-  border-radius: 2rem
+  letter-spacing: -.03rem
   color: $dark-grey
-  box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.15)
-  transition: all 0.3s ease-in-out
+  border: .1rem solid $dark-grey
+  border-radius: 2rem
+  box-shadow: 0 .4rem .8rem rgba(0, 0, 0, .15)
+  font-size: 1.3rem
   &:hover
-    background: $dark-grey
+    transform: translateY(-.3rem)
     color: $white
-    transform: translateY(-0.3rem)
+    background: $dark-grey
     box-shadow: none
   .fa-home
     width: 1.4rem
-    margin-right: 0.5rem
+    margin-right: .5rem
 </style>

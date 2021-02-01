@@ -25,11 +25,11 @@ export default {
   flex-flow: column
   justify-content: center
   align-items: center
-  padding: 0.5rem
+  padding: .5rem
   &__image
     width: 65rem
     height: 42rem
-    margin-bottom: 0.4rem
-    line-height: 42rem
+    margin-bottom: .4rem
     text-align: center
+    line-height: 42rem
 </style>

@@ -31,13 +31,13 @@ export default {
 .title
   display: flex
   flex-flow: column
-  font-weight: 300
-  font-size: 2.35rem
   color: $dark-grey
+  font-size: 2.35rem
+  font-weight: 300
   line-height: 1.2
   &__subtitile
-    font-weight: 600
-    font-size: 1.25rem
-    color: lighten($dark-grey, 6%)
     text-transform: uppercase
+    color: lighten($dark-grey, 6%)
+    font-size: 1.25rem
+    font-weight: 600
 </style>

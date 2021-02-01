@@ -39,7 +39,8 @@ export default {
   box-sizing: border-box
   margin: 0
   padding: 0
-  &:before, &:after
+  &:before,
+  &:after
     box-sizing: border-box
 
 html
@@ -49,22 +50,28 @@ body
   font: 1.6rem/1.6 Montserrat, sans-serif
 
 button
-  outline: none
   border: none
-  &:focus, &:active, &::-moz-focus-inner
-    outline: none
+  outline: none
+  &:focus,
+  &:active,
+  &::-moz-focus-inner
     border: none
+    outline: none
 
 a
-  outline: none
   border: none
-  &:focus, &:active, &::-moz-focus-inner
-    outline: none
+  outline: none
+  &:focus,
+  &:active,
+  &::-moz-focus-inner
     border: none
+    outline: none
 
-.fade-enter-active, .fade-leave-active
-  transition: opacity 0.5s
+.fade-enter-active,
+.fade-leave-active
+  transition: opacity .5s
 
-.fade-enter, .fade-leave-to
+.fade-enter,
+.fade-leave-to
   opacity: 0
 </style>
