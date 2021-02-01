@@ -10,5 +10,5 @@
   justify-content: space-evenly
   padding: 1rem 4rem
   grid-gap: 2rem
-  grid-template-columns: repeat(auto-fit, minmax(10rem, 22rem))
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 22rem))
 </style>

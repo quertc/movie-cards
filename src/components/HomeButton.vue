@@ -31,15 +31,13 @@
   text-decoration: none
   letter-spacing: -.03rem
   color: $dark-grey
-  border: .1rem solid $dark-grey
   border-radius: 2rem
-  box-shadow: 0 .4rem .8rem rgba(0, 0, 0, .15)
+  box-shadow: 0 .4rem .8rem rgba(19, 19, 48, .08)
   font-size: 1.3rem
   &:hover
     transform: translateY(-.3rem)
     color: $white
     background: $dark-grey
-    box-shadow: none
   .fa-home
     width: 1.4rem
     margin-right: .5rem

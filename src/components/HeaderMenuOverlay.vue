@@ -15,7 +15,7 @@
   visibility: hidden
   width: 100vw
   height: 100vh
-  transition: visibility .6s ease-in-out, opacity .6s ease-in-out
+  transition: visibility .5s ease-in-out, opacity .5s ease-in-out
   opacity: 0
   background: $dark-grey
   &.overlay_active

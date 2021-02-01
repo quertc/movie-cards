@@ -29,7 +29,7 @@ export default {
   mounted() {
     setTimeout(() => {
       this.isLoading = false;
-    }, 1000);
+    }, 800);
   },
 };
 </script>
@@ -69,7 +69,7 @@ a
 
 .fade-enter-active,
 .fade-leave-active
-  transition: opacity .5s
+  transition: opacity .6s
 
 .fade-enter,
 .fade-leave-to

@@ -195,7 +195,7 @@ export default {
       align-items: center
       margin: .5rem .6rem
       padding: 1.3rem 2.4rem
-      transition: border .3s, color .3s
+      transition: color .3s, border-color .3s
       text-decoration: none
       letter-spacing: .1rem
       color: lighten($dark-grey, 35%)

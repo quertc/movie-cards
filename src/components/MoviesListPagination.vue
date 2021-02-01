@@ -19,12 +19,10 @@
     cursor: pointer
     transition: all .3s ease-in-out
     text-align: center
-    border: .1rem solid $dark-grey
     background: $white
-    box-shadow: 0 .4rem .8rem rgba(0, 0, 0, .15)
+    box-shadow: 0 .4rem .8rem rgba(19, 19, 48, .1)
     &:hover
       transform: translateY(-.3rem)
       color: $white
       background: $dark-grey
-      box-shadow: none
 </style>

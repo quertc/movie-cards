@@ -1,7 +1,7 @@
 <template>
   <transition name="fade">
     <div
-      v-show="loading"
+      v-if="loading"
       class="preloader"
     >
       <img
@@ -32,7 +32,7 @@ export default {
   align-items: center
   width: 100vw
   height: 100vh
-  background: darken($white, 5%)
+  background: $dark-grey
   &__loader
     width: 10rem
     height: 10rem

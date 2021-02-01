@@ -56,20 +56,20 @@ export default {
 .search-form
   display: flex
   height: 3.6rem
-  border-radius: .7rem
+  border-radius: .8rem
   background: $dark-grey
   box-shadow: 0 .4rem .8rem rgba(0, 0, 0, .15)
   &__input
     padding: 1rem
     color: $white
     border: none
-    border-radius: .7rem
+    border-radius: .8rem
     outline: none
     background: transparent
   &__button
     display: flex
     align-content: center
-    padding: 0 1rem
+    padding: 0 1.2rem 0 1rem
     cursor: pointer
     background: transparent
     .fa-search
