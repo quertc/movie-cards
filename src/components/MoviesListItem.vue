@@ -17,7 +17,7 @@
         class="movie-item__poster"
       >
       <div class="container__rating">
-        {{ movie.vote_average }}/10
+        {{ movie.vote_count === 0 ? 'Not Rated' : `${movie.vote_average}/10` }}
       </div>
     </div>
     <div class="movie-item__description">
