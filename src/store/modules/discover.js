@@ -9,7 +9,7 @@ export default {
       state.discoverData = data;
       state.discoverDataMovies = [...state.discoverDataMovies, ...data.results];
     },
-    clearDiscoverDataMovies(state) {
+    clearDiscoverData(state) {
       state.discoverData = {};
       state.discoverDataMovies = [];
     },

@@ -62,10 +62,10 @@ export default {
     }
   },
   beforeDestroy() {
-    this.clearDiscoverDataMovies();
+    this.clearDiscoverData();
   },
   methods: {
-    ...mapMutations(['clearDiscoverDataMovies']),
+    ...mapMutations(['clearDiscoverData']),
     ...mapActions(['fetchDiscoverData']),
     async loadMoreMovies() {
       await this.fetchDiscoverData([this.$route.params.category, this.discoverData.page + 1]);

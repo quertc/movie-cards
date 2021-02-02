@@ -9,7 +9,7 @@ export default {
       state.genreData = data;
       state.genreDataMovies = [...state.genreDataMovies, ...data.results];
     },
-    clearGenreDataMovies(state) {
+    clearGenreData(state) {
       state.genreData = {};
       state.genreDataMovies = [];
     },

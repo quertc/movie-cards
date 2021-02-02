@@ -75,10 +75,10 @@ export default {
     }
   },
   beforeDestroy() {
-    this.clearGenreDataMovies();
+    this.clearGenreData();
   },
   methods: {
-    ...mapMutations(['clearGenreDataMovies']),
+    ...mapMutations(['clearGenreData']),
     ...mapActions(['fetchGenreData', 'fetchGenresList']),
     async loadMoreMovies() {
       await this.fetchGenreData([this.genreId, this.genreData.page + 1]);
