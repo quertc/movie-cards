@@ -1,6 +1,8 @@
 <template>
-  <router-link
-    to="/"
+  <a
+    :href="`https://www.themoviedb.org/movie/${movie.id}`"
+    target="_blank"
+    :title="movie.title"
     class="movie-item"
   >
     <div class="container">
@@ -21,7 +23,7 @@
     <div class="movie-item__description">
       {{ movie.title }}
     </div>
-  </router-link>
+  </a>
 </template>
 
 <script>
