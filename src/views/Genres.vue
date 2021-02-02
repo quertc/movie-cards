@@ -26,7 +26,7 @@ import MoviesList from '@/components/MoviesList.vue';
 import MoviesListItem from '@/components/MoviesListItem.vue';
 import MoviesListPagination from '@/components/MoviesListPagination.vue';
 import {
-  mapState, mapGetters, mapActions, mapMutations,
+  mapState, mapMutations, mapActions, mapGetters,
 } from 'vuex';
 
 export default {
@@ -49,9 +49,9 @@ export default {
   },
   computed: {
     ...mapState({
-      genresList: state => state.genres.genresList,
       genreData: state => state.genres.genreData,
       genreDataMovies: state => state.genres.genreDataMovies,
+      genresList: state => state.genres.genresList,
     }),
     ...mapGetters(['genresListNames']),
     genreId() {
@@ -59,6 +59,7 @@ export default {
     },
   },
   async mounted() {
+    // FIXME: two fetchGenresList requests due to HeaderMenu component
     if (!this.genresListNames.length) {
       await this.fetchGenresList();
     }
@@ -77,14 +78,14 @@ export default {
     this.clearGenreDataMovies();
   },
   methods: {
-    ...mapActions(['fetchGenresList', 'fetchGenreData']),
     ...mapMutations(['clearGenreDataMovies']),
-    loadMoreMovies() {
-      if (this.genreData.page + 1 >= this.genreData.total_pages) {
+    ...mapActions(['fetchGenreData', 'fetchGenresList']),
+    async loadMoreMovies() {
+      await this.fetchGenreData([this.genreId, this.genreData.page + 1]);
+
+      if (this.genreData.page >= this.genreData.total_pages) {
         this.hidePagination = true;
       }
-
-      this.fetchGenreData([this.genreId, this.genreData.page + 1]);
     },
   },
 };

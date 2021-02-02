@@ -7,9 +7,10 @@ export default {
   mutations: {
     updateDiscoverData(state, data) {
       state.discoverData = data;
-      state.discoverDataMovies = state.discoverDataMovies.concat(data.results);
+      state.discoverDataMovies = [...state.discoverDataMovies, ...data.results];
     },
     clearDiscoverDataMovies(state) {
+      state.discoverData = {};
       state.discoverDataMovies = [];
     },
   },

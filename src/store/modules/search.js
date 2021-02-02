@@ -6,7 +6,7 @@ export default {
   mutations: {
     updateSearchData(state, data) {
       state.searchData = data;
-      state.searchDataMovies = state.searchDataMovies.concat(data.results);
+      state.searchDataMovies = [...state.searchDataMovies, ...data.results];
     },
     clearSearchData(state) {
       state.searchData = {};

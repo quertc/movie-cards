@@ -21,8 +21,8 @@ import HeaderMenuOverlay from '@/components/HeaderMenuOverlay.vue';
 
 export default {
   components: {
-    HeaderSearch,
     HeaderButton,
+    HeaderSearch,
     HeaderMenu,
     HeaderMenuOverlay,
   },

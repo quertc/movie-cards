@@ -25,7 +25,7 @@ import MoviesListTitle from '@/components/MoviesListTitle.vue';
 import MoviesList from '@/components/MoviesList.vue';
 import MoviesListItem from '@/components/MoviesListItem.vue';
 import MoviesListPagination from '@/components/MoviesListPagination.vue';
-import { mapState, mapActions, mapMutations } from 'vuex';
+import { mapState, mapMutations, mapActions } from 'vuex';
 
 export default {
   components: {
@@ -65,14 +65,14 @@ export default {
     this.clearDiscoverDataMovies();
   },
   methods: {
-    ...mapActions(['fetchDiscoverData']),
     ...mapMutations(['clearDiscoverDataMovies']),
-    loadMoreMovies() {
-      if (this.discoverData.page + 1 >= this.discoverData.total_pages) {
+    ...mapActions(['fetchDiscoverData']),
+    async loadMoreMovies() {
+      await this.fetchDiscoverData([this.$route.params.category, this.discoverData.page + 1]);
+
+      if (this.discoverData.page >= this.discoverData.total_pages) {
         this.hidePagination = true;
       }
-
-      this.fetchDiscoverData([this.$route.params.category, this.discoverData.page + 1]);
     },
   },
 };

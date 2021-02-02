@@ -138,8 +138,8 @@ export default {
   computed: mapState({
     genresList: state => state.genres.genresList,
   }),
-  mounted() {
-    this.fetchGenresList();
+  async mounted() {
+    await this.fetchGenresList();
   },
   methods: mapActions(['fetchGenresList']),
 };

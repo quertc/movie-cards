@@ -1,50 +1,48 @@
 <template>
   <main class="main">
-    <template v-if="searchData.results">
-      <div
-        v-if="searchData.results.length"
-        key="search-results"
-        class="main__results"
-      >
-        <MoviesListTitle
-          :title="query"
-          subtitle="search results"
-          class="main__title"
+    <div
+      v-if="searchDataMovies.length"
+      key="search-results"
+      class="main__results"
+    >
+      <MoviesListTitle
+        :title="query"
+        subtitle="search results"
+        class="main__title"
+      />
+      <MoviesList>
+        <MoviesListItem
+          v-for="movie in searchDataMovies"
+          :key="movie.id"
+          :movie="movie"
         />
-        <MoviesList>
-          <MoviesListItem
-            v-for="movie in searchDataMovies"
-            :key="movie.id"
-            :movie="movie"
-          />
-        </MoviesList>
-        <MoviesListPagination
-          class="main__pagination"
-          :class="{ main__pagination_hidden: hidePagination }"
-          @load-more="loadMoreMovies"
-        />
+      </MoviesList>
+      <MoviesListPagination
+        class="main__pagination"
+        :class="{ main__pagination_hidden: hidePagination }"
+        @load-more="loadMoreMovies"
+      />
+    </div>
+    <div
+      v-else
+      key="search-error"
+      class="main__error"
+    >
+      <div class="main__not-found">
+        <h2 class="main__not-found-title">
+          Sorry!
+        </h2>
+        <p class="main__not-found-description">
+          Nothing found for {{ $route.params.query }}
+        </p>
+        <img
+          src="@/assets/not-found.svg"
+          class="main__not-found-image"
+          alt="Not Found"
+        >
+        <HomeButton />
       </div>
-      <div
-        v-else
-        key="search-error"
-        class="main__error"
-      >
-        <div class="main__not-found">
-          <h2 class="main__not-found-title">
-            Sorry!
-          </h2>
-          <p class="main__not-found-description">
-            Nothing found for {{ $route.params.query }}
-          </p>
-          <img
-            src="@/assets/not-found.svg"
-            class="main__not-found-image"
-            alt="Not Found"
-          >
-          <HomeButton />
-        </div>
-      </div>
-    </template>
+    </div>
   </main>
 </template>
 
@@ -54,7 +52,7 @@ import MoviesList from '@/components/MoviesList.vue';
 import MoviesListItem from '@/components/MoviesListItem.vue';
 import MoviesListPagination from '@/components/MoviesListPagination.vue';
 import HomeButton from '@/components/HomeButton.vue';
-import { mapState, mapActions, mapMutations } from 'vuex';
+import { mapState, mapMutations, mapActions } from 'vuex';
 
 export default {
   components: {
@@ -90,14 +88,14 @@ export default {
     this.clearSearchData();
   },
   methods: {
-    ...mapActions(['getSearchData']),
     ...mapMutations(['clearSearchData']),
-    loadMoreMovies() {
-      if (this.searchData.page + 1 >= this.searchData.total_pages) {
+    ...mapActions(['getSearchData']),
+    async loadMoreMovies() {
+      await this.getSearchData([this.$route.params.query, this.searchData.page + 1]);
+
+      if (this.searchData.page >= this.searchData.total_pages) {
         this.hidePagination = true;
       }
-
-      this.getSearchData([this.$route.params.query, this.searchData.page + 1]);
     },
   },
 };
