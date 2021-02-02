@@ -5,7 +5,7 @@
   >
     <img
       v-if="movie.poster_path"
-      :src="`https://image.tmdb.org/t/p/w342${movie.poster_path}`"
+      :src="`${configuration.images.secure_base_url}w342${movie.poster_path}`"
       class="movie-item__poster"
     >
     <img
@@ -20,6 +20,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
   props: {
     movie: {
@@ -27,6 +29,9 @@ export default {
       required: true,
     },
   },
+  computed: mapState({
+    configuration: state => state.configuration.configurationData,
+  }),
 };
 </script>
 

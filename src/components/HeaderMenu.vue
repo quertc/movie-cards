@@ -132,16 +132,12 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapState } from 'vuex';
 
 export default {
   computed: mapState({
     genresList: state => state.genres.genresList,
   }),
-  async mounted() {
-    await this.fetchGenresList();
-  },
-  methods: mapActions(['fetchGenresList']),
 };
 </script>
 

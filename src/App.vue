@@ -14,6 +14,7 @@
 <script>
 import LoaderLayout from '@/components/LoaderLayout.vue';
 import TheHeader from '@/components/TheHeader.vue';
+import { mapActions } from 'vuex';
 
 export default {
   name: 'App',
@@ -26,11 +27,12 @@ export default {
       isLoading: true,
     };
   },
-  mounted() {
-    setTimeout(() => {
-      this.isLoading = false;
-    }, 800);
+  async mounted() {
+    await this.getConfigurationData();
+    await this.fetchGenresList();
+    setTimeout(() => { this.isLoading = false; }, 800);
   },
+  methods: mapActions(['getConfigurationData', 'fetchGenresList']),
 };
 </script>
 
