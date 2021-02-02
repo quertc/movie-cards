@@ -1,48 +1,50 @@
 <template>
   <main class="main">
-    <div
-      v-if="searchDataMovies.length"
-      key="search-results"
-      class="main__results"
-    >
-      <MoviesListTitle
-        :title="query"
-        subtitle="search results"
-        class="main__title"
-      />
-      <MoviesList>
-        <MoviesListItem
-          v-for="movie in searchDataMovies"
-          :key="movie.id"
-          :movie="movie"
+    <template v-if="searchData.results">
+      <div
+        v-if="searchDataMovies.length"
+        key="search-results"
+        class="main__results"
+      >
+        <MoviesListTitle
+          :title="query"
+          subtitle="search results"
+          class="main__title"
         />
-      </MoviesList>
-      <MoviesListPagination
-        class="main__pagination"
-        :class="{ main__pagination_hidden: hidePagination }"
-        @load-more="loadMoreMovies"
-      />
-    </div>
-    <div
-      v-else
-      key="search-error"
-      class="main__error"
-    >
-      <div class="main__not-found">
-        <h2 class="main__not-found-title">
-          Sorry!
-        </h2>
-        <p class="main__not-found-description">
-          Nothing found for {{ $route.params.query }}
-        </p>
-        <img
-          src="@/assets/not-found.svg"
-          class="main__not-found-image"
-          alt="Not Found"
-        >
-        <HomeButton />
+        <MoviesList>
+          <MoviesListItem
+            v-for="movie in searchDataMovies"
+            :key="movie.id"
+            :movie="movie"
+          />
+        </MoviesList>
+        <MoviesListPagination
+          class="main__pagination"
+          :class="{ main__pagination_hidden: hidePagination }"
+          @load-more="loadMoreMovies"
+        />
       </div>
-    </div>
+      <div
+        v-else
+        key="search-error"
+        class="main__error"
+      >
+        <div class="main__not-found">
+          <h2 class="main__not-found-title">
+            Sorry!
+          </h2>
+          <p class="main__not-found-description">
+            Nothing found for {{ $route.params.query }}
+          </p>
+          <img
+            src="@/assets/not-found.svg"
+            class="main__not-found-image"
+            alt="Not Found"
+          >
+          <HomeButton />
+        </div>
+      </div>
+    </template>
   </main>
 </template>
 
