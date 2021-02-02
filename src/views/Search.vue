@@ -3,7 +3,6 @@
     <template v-if="searchData.results">
       <div
         v-if="searchDataMovies.length"
-        key="search-results"
         class="main__results"
       >
         <MoviesListTitle
@@ -26,7 +25,6 @@
       </div>
       <div
         v-else
-        key="search-error"
         class="main__error"
       >
         <div class="main__not-found">

@@ -5,13 +5,11 @@
   >
     <img
       v-if="movie.poster_path"
-      key="success-poster"
       :src="`https://image.tmdb.org/t/p/w342${movie.poster_path}`"
       class="movie-item__poster"
     >
     <img
       v-else
-      key="error-poster"
       src="@/assets/no-image.png"
       class="movie-item__poster"
     >
