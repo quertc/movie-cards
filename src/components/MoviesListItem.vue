@@ -5,7 +5,7 @@
   >
     <img
       v-if="movie.poster_path"
-      :src="`${configuration.images.secure_base_url}w342${movie.poster_path}`"
+      :src="`${configuration.images ? configuration.images.secure_base_url : 'https://image.tmdb.org/t/p/'}w342${movie.poster_path}`"
       class="movie-item__poster"
     >
     <img
