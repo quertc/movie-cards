@@ -14,7 +14,7 @@ export default {
         const data = await response.json();
         commit('updateConfigurationData', data);
       } catch (e) {
-        console.error(e);
+        console.log(e);
       }
     },
   },

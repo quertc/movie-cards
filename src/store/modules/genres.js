@@ -24,7 +24,7 @@ export default {
         const data = await response.json();
         commit('updateGenreData', data);
       } catch (e) {
-        console.error(e);
+        console.log(e);
       }
     },
     async fetchGenresList({ commit }) {
@@ -33,7 +33,7 @@ export default {
         const data = await response.json();
         commit('updateGenresList', data.genres);
       } catch (e) {
-        console.error(e);
+        console.log(e);
       }
     },
   },

@@ -20,7 +20,7 @@ export default {
         const data = await response.json();
         commit('updateSearchData', data);
       } catch (e) {
-        console.error(e);
+        console.log(e);
       }
     },
   },
