@@ -52,7 +52,7 @@ export default {
   }),
   async mounted() {
     if (!this.discoverCategories.includes(this.$route.params.category)) {
-      this.$router.push('/404');
+      this.$router.push('/');
     } else {
       await this.fetchDiscoverData([this.$route.params.category]);
 

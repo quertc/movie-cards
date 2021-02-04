@@ -65,7 +65,7 @@ export default {
     }
 
     if (!this.genresListNames.includes(this.$route.params.genre)) {
-      this.$router.push('/404');
+      this.$router.push('/');
     } else {
       await this.fetchGenreData([this.genreId]);
 
