@@ -27,12 +27,8 @@ const routes = [
     props: true,
   },
   {
-    path: '/404',
-    component: () => import('@/views/404.vue'),
-  },
-  {
     path: '*',
-    redirect: '/404',
+    redirect: '/discover/popular',
   },
 ];
 

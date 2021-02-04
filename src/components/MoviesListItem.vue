@@ -81,4 +81,10 @@ export default {
     transform: scale(1.03)
     .movie-item__poster
       box-shadow: 0 1rem 3rem rgba(0, 0, 0, .2)
+
+@media (max-width: 630px)
+  .movie-item
+    .container,
+    &__poster
+      height: 30rem
 </style>

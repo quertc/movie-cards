@@ -131,4 +131,16 @@ export default {
     &_hidden
       visibility: hidden
       opacity: 0
+
+@media (max-width: 480px)
+  .main
+    &__not-found-image
+      width: 35rem
+      height: 35rem
+
+@media (max-width: 390px)
+  .main
+    &__not-found-image
+      width: 30rem
+      height: 30rem
 </style>
