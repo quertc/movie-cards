@@ -14,7 +14,7 @@
     </MoviesList>
     <MoviesListPagination
       class="main__pagination"
-      :class="{ main__pagination_hidden: hidePagination }"
+      :class="{ main__pagination_hidden: hidePagination || !genreData.results }"
       @load-more="loadMoreMovies"
     />
   </main>
