@@ -1,4 +1,4 @@
-# movie-library
+# movie-cards
 
 ## Project setup
 
