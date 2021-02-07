@@ -5,10 +5,6 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: '/',
-    redirect: '/discover/popular',
-  },
-  {
     path: '/discover/:category',
     name: 'discover',
     component: () => import('@/views/Discover.vue'),
