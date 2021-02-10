@@ -178,7 +178,7 @@ export default {
       &:last-child
         transform: rotate(-45deg)
   &__logo
-    width: 14rem
+    width: 13rem
     height: 7rem
     margin: 2.5rem auto
     text-align: center
