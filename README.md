@@ -1,4 +1,4 @@
-# Simple movie library
+# Simple movie library ([Demo](https://quertc.github.io/movie-cards))
 
 ![Screenshot](https://github.com/quertc/movie-cards/blob/master/preview.png)
 
